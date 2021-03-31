@@ -32,11 +32,20 @@ const About: NextPage = () => {
   );
 }
 
-const JobItem: React.FC<{ job: Job }> = ({ job }) => (
-  <div className={styles.jobItem}>
-    <pre>{JSON.stringify(job)}</pre>
-  </div>
-);
+const JobItem: React.FC<{ job: Job }> = ({ job }) => {
+  return (
+    <div className={styles.jobItem}>
+      <button 
+        className={styles.deleteButton} 
+        onClick={() => deleteJob(job.id)}
+      >✕</button>
+      <p>{job.applied ? 'appl' : 'notAppl'}</p>
+      <p>{job.title}</p>
+      <p>{job.company}</p>
+      <p>{job.description}</p>
+    </div>
+  );
+}
 
 const AddJobItem = () => {
   const [title, setTitle] = useState('')
@@ -91,7 +100,7 @@ const AddJobItem = () => {
       />
       <input 
         className={styles.input + styles.inputDescription}
-        placeholder="description"
+        placeholder="job description"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
