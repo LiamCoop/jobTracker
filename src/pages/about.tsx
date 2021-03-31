@@ -1,31 +1,40 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "../styles/About.module.css";
 import { useJobs, createJob, deleteJob } from '../api2';
 import { Job } from '../types';
 
+const About: NextPage = () => {
+  const { data: jobs, error } = useJobs();
 
-const About: NextPage = () => (
-  <div>
-    <Head>
-      <title>page</title>
-    </Head>
+  if (error != null) return <div>Error loading jobs...</div>
+  if (jobs == null) return <div>Loading...</div>
 
-    <main className={styles.main}>
-      <div>test</div>  
-    </main>
+  if (jobs.length === 0) {
+    return <div className={styles.emptyState}>Add a job</div>
+  }
 
-  </div>
-)
+  return (
+    <div>
+      <Head>
+        <title>About</title>
+      </Head>
+
+      <main className={styles.main}>
+        <AddJobItem />
+        {jobs.map((job) => (
+          <JobItem job={job} />
+        ))}
+      </main>
+
+    </div>
+  );
+}
 
 const JobItem: React.FC<{ job: Job }> = ({ job }) => (
-  <div>
-    <p>{job.title}</p>
-    <p>{job.company}</p>
-    <p>{job.description}</p>
-    <p>{job.contact}</p>
-    <p>{job.notes}</p>
+  <div className={styles.jobItem}>
+    <pre>{JSON.stringify(job)}</pre>
   </div>
 );
 
@@ -42,6 +51,8 @@ const AddJobItem = () => {
     setCompany('')
     setDescription('')
     setApplied(false)
+    setNotes('')
+    setContact('')
   }
 
   return (
@@ -96,6 +107,7 @@ const AddJobItem = () => {
         value={contact}
         onChange={e => setContact(e.target.value)}
       />
+      <button className={styles.button}>submit</button>
     </form>
 
   );

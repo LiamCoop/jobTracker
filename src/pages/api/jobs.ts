@@ -12,16 +12,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.json(jobs);
   } else if (req.method === "POST") {
     // create posting
-    // const data = JSON.parse(req.body);
-    const job = await prisma.job.create({ data: req.body });
+    const data = JSON.parse(req.body);
+    const job = await prisma.job.create({ data: data });
     res.json(job);
   } else if (req.method === "PUT") {
     // update posting
     const id = req.query.jobId as string;
-    // const data = JSON.parse(req.body);
+    const data = JSON.parse(req.body);
     const job = await prisma.job.update({
       where: { id },
-      data: req.body,
+      data: data,
     });
 
     res.json(job);
