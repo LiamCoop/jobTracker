@@ -16,14 +16,3 @@ model Todo {
   text      String
   completed Boolean
 }
-
-model Job {
-  id          String   @id @default(uuid())
-  createdAt   DateTime @default(now())
-  applied     Boolean
-  company     String
-  title       String
-  description String
-  contact     String
-  notes       String
-}
