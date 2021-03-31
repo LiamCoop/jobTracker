@@ -22,7 +22,7 @@ const About: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <AddJobItem />
+        <div className={styles.jobFoldDiv}><AddJobFold /></div>
         {jobs.map((job) => (
           <JobItem job={job} />
         ))}
@@ -33,18 +33,49 @@ const About: NextPage = () => {
 }
 
 const JobItem: React.FC<{ job: Job }> = ({ job }) => {
+  const [showMore, setShowMore] = useState(false);
   return (
     <div className={styles.jobItem}>
-      <button 
-        className={styles.deleteButton} 
-        onClick={() => deleteJob(job.id)}
-      >✕</button>
-      <p>{job.applied ? 'appl' : 'notAppl'}</p>
-      <p>{job.title}</p>
-      <p>{job.company}</p>
-      <p>{job.description}</p>
+      <div className={styles.jobMain}>
+        <button 
+          className={styles.deleteButton} 
+          onClick={() => deleteJob(job.id)}
+        >✕</button>
+        <button 
+          className={styles.editButton} 
+        >Edit</button>
+        <p>{`Applied: ${job.applied ? '✔' : '✕'}`}</p>
+        <p>{job.title}</p>
+        <p>{job.company}</p>
+        <p>{job.contact}</p>
+        <p onClick={() => setShowMore(!showMore)}>show more</p>
+      </div>
+      {showMore && 
+        <div className={styles.showMore}>
+          <p>{job.description}</p>
+          <p>{job.notes}</p>
+        </div>
+      }
     </div>
   );
+}
+
+const AddJobFold = () => {
+  const [show, setShow] = useState(false);
+  return (
+    <div>
+      <div className={styles.plusGroup}>
+        <div 
+          onClick={() => setShow(!show)} 
+          className={styles.circle}
+        >
+          <p>+</p>
+        </div>
+        <p>Click to add new job</p>
+      </div>
+      {show && <AddJobItem /> }
+    </div>
+  )
 }
 
 const AddJobItem = () => {
@@ -80,39 +111,43 @@ const AddJobItem = () => {
         resetJob()
       }}
     >
-      <input 
-        type="checkbox" 
-        checked={applied}
-        value="applied"
-        onChange={e => setApplied(!applied)}
-      />
-      <input 
-        className={styles.input + styles.inputTitle}
-        placeholder="job title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
+      <div>
+        <label htmlFor="applied">Applied</label>
+        <input 
+          type="checkbox" 
+          checked={applied}
+          value="applied"
+          onChange={e => setApplied(!applied)}
+        />
+      </div>
       <input 
         className={styles.input + styles.inputCompany}
-        placeholder="company"
+        placeholder="Company Name"
         value={company}
         onChange={e => setCompany(e.target.value)}
       />
       <input 
+        className={styles.input + styles.inputTitle}
+        placeholder="Job Ditle"
+        value={title}
+        onChange={e => setTitle(e.target.value)}
+      />
+      
+      <input 
         className={styles.input + styles.inputDescription}
-        placeholder="job description"
+        placeholder="Job Description"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
       <input 
         className={styles.input + styles.inputNotes}
-        placeholder="notes"
+        placeholder="Additional notes"
         value={notes}
         onChange={e => setNotes(e.target.value)}
       />
       <input 
         className={styles.input + styles.inputContact}
-        placeholder="contact"
+        placeholder="Contact Info"
         value={contact}
         onChange={e => setContact(e.target.value)}
       />

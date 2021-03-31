@@ -1,5 +1,64 @@
-.jobItem {
+.jobFoldDiv {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
+  margin: 20px;
+}
+
+.plusGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.addJob {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.jobItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.jobMain {
+  display: grid;
+  grid-template-columns: repeat(2, 50px) repeat(5, 1fr);
+  column-gap: 10px;
+}
+
+.showMore {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.showMore > * {
+  margin: 5px 5px;
+}
+
+.editButton, 
+.deleteButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jobItem > * {
+  border: 1px solid black;
+  background: #eeeeee;
 }
