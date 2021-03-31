@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import styles from "../styles/About.module.css";
+import { useJobs, createJob, deleteJob } from '../api2';
 import { Job } from '../types';
 
 
@@ -33,6 +34,8 @@ const AddJobItem = () => {
   const [company, setCompany] = useState('')
   const [description, setDescription] = useState('')
   const [applied, setApplied] = useState(false)
+  const [notes, setNotes] = useState('')
+  const [contact, setContact] = useState('')
 
   const resetJob = () => {
     setTitle('')
@@ -46,14 +49,14 @@ const AddJobItem = () => {
       className={styles.addJob}
       onSubmit={async e => {
         e.preventDefault(); 
-        /*
-        createJob({
+        createJob(
           title,
           description,
           company,
-          applied
-        });
-        */
+          applied,
+          contact,
+          notes,
+        );
         resetJob()
       }}
     >
@@ -80,6 +83,18 @@ const AddJobItem = () => {
         placeholder="description"
         value={description}
         onChange={e => setDescription(e.target.value)}
+      />
+      <input 
+        className={styles.input + styles.inputNotes}
+        placeholder="notes"
+        value={notes}
+        onChange={e => setNotes(e.target.value)}
+      />
+      <input 
+        className={styles.input + styles.inputContact}
+        placeholder="contact"
+        value={contact}
+        onChange={e => setContact(e.target.value)}
       />
     </form>
 
