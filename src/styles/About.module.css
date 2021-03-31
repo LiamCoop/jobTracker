@@ -30,18 +30,20 @@
   align-items: flex-start;
 }
 
+
 .jobItem {
   display: flex;
   flex-direction: column;
+  border: 1px solid black;
 }
 
 .jobMain {
-  display: grid;
-  grid-template-columns: repeat(2, 50px) repeat(5, 1fr);
-  column-gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
-.showMore {
+.jobMore {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -51,14 +53,13 @@
   margin: 5px 5px;
 }
 
-.editButton, 
-.deleteButton {
+.jobButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.jobButtons > * {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.jobItem > * {
-  border: 1px solid black;
-  background: #eeeeee;
 }

@@ -34,24 +34,31 @@ const About: NextPage = () => {
 
 const JobItem: React.FC<{ job: Job }> = ({ job }) => {
   const [showMore, setShowMore] = useState(false);
+
   return (
     <div className={styles.jobItem}>
       <div className={styles.jobMain}>
-        <button 
-          className={styles.deleteButton} 
-          onClick={() => deleteJob(job.id)}
-        >✕</button>
-        <button 
-          className={styles.editButton} 
-        >Edit</button>
         <p>{`Applied: ${job.applied ? '✔' : '✕'}`}</p>
-        <p>{job.title}</p>
-        <p>{job.company}</p>
-        <p>{job.contact}</p>
-        <p onClick={() => setShowMore(!showMore)}>show more</p>
+        <p>{`Title: ${job.title}`}</p>
+        <p>{`Company: ${job.company}`}</p>
+        <p>{`Contact: ${job.contact}`}</p>
+        <p onClick={() => setShowMore(!showMore)}>⌄</p>
+        <div className={styles.jobButtons}>
+          <button 
+            className={styles.deleteButton} 
+            onClick={() => deleteJob(job.id)}
+          >
+            ✕
+          </button>
+          <button 
+            className={styles.editButton} 
+          >
+            Edit
+          </button>
+        </div>
       </div>
       {showMore && 
-        <div className={styles.showMore}>
+        <div className={styles.jobMore}>
           <p>{job.description}</p>
           <p>{job.notes}</p>
         </div>
@@ -73,12 +80,12 @@ const AddJobFold = () => {
         </div>
         <p>Click to add new job</p>
       </div>
-      {show && <AddJobItem /> }
+      {show && <AddJobItem closeFold={() => {setShow(false)}} /> }
     </div>
   )
 }
 
-const AddJobItem = () => {
+const AddJobItem = ({ closeFold }) => {
   const [title, setTitle] = useState('')
   const [company, setCompany] = useState('')
   const [description, setDescription] = useState('')
@@ -94,21 +101,23 @@ const AddJobItem = () => {
     setNotes('')
     setContact('')
   }
-
+  const fireCreateJob = () => 
+    createJob(
+      title, 
+      description, 
+      company, 
+      applied, 
+      contact, 
+      notes
+    );
   return (
     <form
       className={styles.addJob}
       onSubmit={async e => {
-        e.preventDefault(); 
-        createJob(
-          title,
-          description,
-          company,
-          applied,
-          contact,
-          notes,
-        );
+        e.preventDefault()
+        fireCreateJob()
         resetJob()
+        closeFold()
       }}
     >
       <div>
@@ -128,11 +137,10 @@ const AddJobItem = () => {
       />
       <input 
         className={styles.input + styles.inputTitle}
-        placeholder="Job Ditle"
+        placeholder="Job Title"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
-      
       <input 
         className={styles.input + styles.inputDescription}
         placeholder="Job Description"
