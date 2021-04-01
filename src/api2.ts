@@ -10,12 +10,30 @@ export const createJob = async (
   description: string,
   company: string,
   applied: boolean,
-  notes: string,
-  contact: string,
+  notes?: string,
+  contact?: string,
+  datePosted?: string,
+  dateClosed?: string,
+  location?: string,
+  link?: string,
+  tags?: string[],
 ) => {
   mutate(
     jobPath,
-    jobPostings => [{ id: "new-job", title, description, company, applied, notes, contact}, ...jobPostings],
+    jobPostings => [{ 
+      id: "new-job", 
+      title, 
+      description, 
+      company, 
+      applied, 
+      notes, 
+      contact,
+      datePosted,
+      dateClosed,
+      location,
+      link,
+      tags,
+    }, ...jobPostings],
     false,
   );
   await fetch(jobPath, {
@@ -27,6 +45,11 @@ export const createJob = async (
       applied, 
       notes, 
       contact,
+      datePosted,
+      dateClosed,
+      location,
+      link,
+      tags,
     }),
   });
 
@@ -36,8 +59,8 @@ export const createJob = async (
 export const updateJob = async (job: Job) => {
   mutate(
     jobPath,
-    todos =>
-      todos.map(j =>
+    jobs =>
+      jobs.map(j =>
         j.id === job.id ? { ...job } : j,
       ),
     false,

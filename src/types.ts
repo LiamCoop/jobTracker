@@ -12,6 +12,16 @@ export interface Job {
   description: string;
   company: string;
   applied: boolean;
-  notes: string;
-  contact: string;
+  notes?: string;
+  contact?: string;
+  datePosted?: string;
+  dateClosed?: string;
+  location?: string;
+  link?: string;
+  tags?: string[];
 }
+// date posted?
+// date closing?
+// location
+// tags
+// link
