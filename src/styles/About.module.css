@@ -4,6 +4,12 @@
   justify-content: center;
 }
 
+.liveSearchContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .jobFoldDiv {
   align-self: center;
 }
@@ -14,7 +20,7 @@
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: 
-    minmax(100px, 1.5fr) minmax(200px, 5fr) repeat(1, 1fr);
+    minmax(130px, 1.5fr) minmax(200px, 6fr) minmax(50px, 1fr);
 }
 
 .deleteButton, 
@@ -24,7 +30,7 @@
   align-items: center;
 }
 
-.appliedDiv {
+.jobAppliedDiv {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -34,10 +40,15 @@
   margin: 0px 10px;
 }
 
+.jobAppliedText {
+  font-size: 14px;
+  margin: 0px;
+}
+
 .jobTitle {
   grid-column: 2;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   margin: 5px;
 }
 
@@ -62,7 +73,6 @@
   align-items: center;
   justify-self: center;
 }
-
 
 .jobShowMore {
   display: flex;
@@ -119,11 +129,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   border: 1px solid black;
   border-radius: 50%;
-  margin: 5px;
+  margin: 2px;
 }
 
 

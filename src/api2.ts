@@ -67,7 +67,7 @@ export const updateJob = async (job: Job) => {
   );
   await fetch(`${jobPath}?jobId=${job.id}`, {
     method: "PUT",
-    body: JSON.stringify({}),
+    body: JSON.stringify(job),
   });
   mutate(jobPath);
 };

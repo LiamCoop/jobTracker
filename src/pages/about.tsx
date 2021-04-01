@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/About.module.css";
-import { useJobs, createJob, deleteJob } from '../api2';
+import { useJobs, createJob, updateJob, deleteJob } from '../api2';
 import { Job } from '../types';
 
 const About: NextPage = () => {
@@ -21,13 +21,52 @@ const About: NextPage = () => {
         <div className={styles.jobFoldDiv}>
           <AddJobFold />
         </div>
-        {jobs.map((job) => (
-          <JobItem key={job.id} job={job} />
-        ))}
+        <LiveSearch jobs={jobs} />
       </main>
 
     </div>
   );
+}
+
+const LiveSearch: React.FC<{ jobs: Job[]}> = ({ jobs }) => {
+  const [text, setText] = useState('')
+  const [show, setShow] = useState(jobs);
+
+  useEffect(() => {
+    const updateSearch = () => {
+      const display = jobs.filter((job) => (
+        job.company.includes(text) ||  
+        job.title.includes(text) || 
+        job.description.includes(text) ||
+        job.notes.includes(text) || 
+        job.location.includes(text) || 
+        job.contact.includes(text) ||
+        job.datePosted.includes(text) ||
+        job.link.includes(text)
+      ))
+      setShow(display)
+    }
+    updateSearch()
+  }, [text])
+
+  return(
+    <div className={styles.liveSearchContainer}>
+      <form
+        className={styles.liveSearchForm} 
+        onSubmit={async e => { e.preventDefault() }}
+      >
+        <input
+          className={`${styles.input} ${styles.liveSearchInput}`}
+          value={text}
+          placeholder="search jobs"
+          onChange={e => setText(e.target.value)}
+        />
+      </form>
+      {jobs.map((job) => (
+        <JobItem key={job.id} job={job} />
+      ))}
+    </div>
+  )
 }
 
 const JobItem: React.FC<{ job: Job }> = ({ job }) => {
@@ -36,8 +75,13 @@ const JobItem: React.FC<{ job: Job }> = ({ job }) => {
   return (
     <>
       <div className={styles.jobGrid}>
-        <div className={styles.appliedDiv}>
-          <div className={styles.circle}>
+        <div className={styles.jobAppliedDiv}>
+          <div 
+            className={styles.circle}
+            onDoubleClick={() => 
+              updateJob({ ...job, applied: !job.applied })
+            }
+          >
             <p className={styles.jobAppliedSymbol}>{job.applied ? '✔' : '✕'}</p>
           </div>
           <p className={styles.jobAppliedText}>{`${job.applied ? '' : 'Not'} Applied`}</p>
