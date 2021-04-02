@@ -1,0 +1,30 @@
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userContainer {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.userName {
+  margin: 2px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.userEmail {
+  margin: 2px;
+}
+
+.userAvatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  grid-row: 1 / -1;
+}
