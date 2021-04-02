@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createJob } from '../../api2';
 import styles from './AddJob.module.css';
 
@@ -32,9 +32,24 @@ const AddJobItem = ({ closeFold }) => {
   const [dateClosed, setDateClosed] = useState('');
   const [location, setLocation] = useState('');
   const [link, setLink] = useState('');
-  // const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([]);
+  const handleTags = (arg: string[]) => setTags(arg)
 
-  const resetJob = () => {
+  const submitForm = () => {
+    createJob(
+      title, 
+      description, 
+      company, 
+      applied, 
+      contact, 
+      notes,
+      datePosted,
+      dateClosed,
+      location,
+      link,
+      tags,
+    );
+
     setTitle('')
     setCompany('')
     setDescription('')
@@ -45,29 +60,18 @@ const AddJobItem = ({ closeFold }) => {
     setDateClosed('');
     setLocation('');
     setLink('');
-  }
+    setTags([]);
 
-  const fireCreateJob = () => createJob(
-    title, 
-    description, 
-    company, 
-    applied, 
-    contact, 
-    notes,
-    datePosted,
-    dateClosed,
-    location,
-    link,
-  );
+    closeFold()
+  }
 
   return (
     <form
       className={styles.addJob}
-      onSubmit={async e => {
+      onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
+      onSubmit={e => {
         e.preventDefault()
-        fireCreateJob()
-        resetJob()
-        closeFold()
+        submitForm()
       }}
     >
       <input 
@@ -124,6 +128,10 @@ const AddJobItem = ({ closeFold }) => {
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
+      <TagsInput tags={tags} handleTags={handleTags} />
+      <div style={{display: 'flex', flexDirection: 'row'}}>
+        {tags.map((tag)=><p>{tag}</p>)}
+      </div>
       <div>
         <input 
           type="checkbox" 
@@ -132,8 +140,44 @@ const AddJobItem = ({ closeFold }) => {
           onChange={e => setApplied(!applied)}
         />
         <label htmlFor="applied">Applied</label>
-        <button className={styles.addJobButton}>Add Job</button>
+        <button className={styles.addJobButton} >
+          Add Job
+        </button>
       </div>
     </form>
   );
+}
+
+
+const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}> = 
+({ tags, handleTags }) => {
+  const [text, setText] = useState('');
+  const [unique, setUnique] = useState(true);
+
+  useEffect(() => {
+    const resetUnique = () => {
+      handleTags(tags.filter((item, pos) => tags.indexOf(item) === pos))
+      setUnique(true)
+    }
+    if(!unique) resetUnique
+  }, [unique])
+
+  return (
+    <div className={styles.tagContainer}>
+      <input
+        className={styles.tagInput}
+        type="text"
+        placeholder="tags"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if(e.key === 'Enter') {
+            handleTags([...tags, text])
+            setUnique(false)
+            setText('')
+          }
+        }}
+      />
+    </div>
+  )
 }
