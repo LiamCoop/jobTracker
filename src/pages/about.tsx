@@ -2,7 +2,8 @@ import { NextPage } from "next";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/About.module.css";
-import { useJobs, createJob, updateJob, deleteJob } from '../api2';
+import { useJobs, updateJob, deleteJob } from '../api2';
+import { AddJobFold } from '../components/AddJob/addJob';
 import { Job } from '../types';
 
 const About: NextPage = () => {
@@ -71,6 +72,7 @@ const LiveSearch: React.FC<{ jobs: Job[]}> = ({ jobs }) => {
 
 const JobItem: React.FC<{ job: Job }> = ({ job }) => {
   const [showMore, setShowMore] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <>
@@ -93,12 +95,29 @@ const JobItem: React.FC<{ job: Job }> = ({ job }) => {
           {job.datePosted ? 
             <p className={styles.jobDatePosted}>{job.datePosted}</p> : null}
         </div>
-        <button 
-          className={styles.deleteButton} 
-          onClick={() => deleteJob(job.id)}
-        >
-          x
-        </button>
+        <div className={styles.jobButtonDiv}>
+          <button 
+            className={styles.deleteButton} 
+            onClick={() => deleteJob(job.id)}
+          >
+            x
+          </button>
+          {isEditing ? (
+              <button 
+                className={styles.saveButton}
+                onClick={() => setIsEditing(false)}
+              >
+                Save
+              </button>
+            ) : ( <button 
+                className={styles.editButton} 
+                onClick={() => setIsEditing(true)}
+              >
+                Edit
+              </button> 
+            ) 
+          }
+        </div>
         <p 
           className={styles.carat} 
           onClick={() => setShowMore(!showMore)}
@@ -122,138 +141,6 @@ const JobItem: React.FC<{ job: Job }> = ({ job }) => {
   );
 }
 
-const AddJobFold = () => {
-  const [show, setShow] = useState(false);
-  return (
-    <div className={styles.addJobFoldContainer}>
-      <div className={styles.addJobIcon}>
-        <div 
-          onClick={() => setShow(!show)} 
-          className={styles.circle}
-        >
-          <p>+</p>
-        </div>
-        <p>Add a job</p>
-      </div>
-      {show && <AddJobItem closeFold={() => {setShow(false)}} /> }
-    </div>
-  )
-}
 
-const AddJobItem = ({ closeFold }) => {
-  const [title, setTitle] = useState('')
-  const [company, setCompany] = useState('')
-  const [description, setDescription] = useState('')
-  const [applied, setApplied] = useState(false)
-  const [notes, setNotes] = useState('')
-  const [contact, setContact] = useState('')
-  const [datePosted, setDatePosted] = useState('');
-  const [dateClosed, setDateClosed] = useState('');
-  const [location, setLocation] = useState('');
-  const [link, setLink] = useState('');
-  // const [tags, setTags] = useState([]);
-
-  const resetJob = () => {
-    setTitle('')
-    setCompany('')
-    setDescription('')
-    setApplied(false)
-    setNotes('')
-    setContact('')
-    setDatePosted('');
-    setDateClosed('');
-    setLocation('');
-    setLink('');
-  }
-  const fireCreateJob = () => createJob(
-    title, 
-    description, 
-    company, 
-    applied, 
-    contact, 
-    notes,
-    datePosted,
-    dateClosed,
-    location,
-    link,
-  );
-
-  return (
-    <form
-      className={styles.addJob}
-      onSubmit={async e => {
-        e.preventDefault()
-        fireCreateJob()
-        resetJob()
-        closeFold()
-      }}
-    >
-      <input 
-        className={`${styles.input} ${styles.inputCompany}`}
-        placeholder="Company"
-        value={company}
-        onChange={e => setCompany(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputTitle}`}
-        placeholder="Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputNotes}`}
-        placeholder="Notes"
-        value={notes}
-        onChange={e => setNotes(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputContact}`}
-        placeholder="Contact"
-        value={contact}
-        onChange={e => setContact(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputDatePosted}`}
-        placeholder="Post Date"
-        value={datePosted}
-        onChange={e => setDatePosted(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputDateClosed}`}
-        placeholder="Close Date"
-        value={dateClosed}
-        onChange={e => setDateClosed(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputLocation}`}
-        placeholder="Location"
-        value={location}
-        onChange={e => setLocation(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.link}`}
-        placeholder="Link"
-        value={link}
-        onChange={e => setLink(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputDescription}`}
-        placeholder="Description"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      />
-      <div>
-        <input 
-          type="checkbox" 
-          checked={applied}
-          value="applied"
-          onChange={e => setApplied(!applied)}
-        />
-        <label htmlFor="applied">Applied</label>
-      </div>
-      <button className={styles.addJobButton}>Add Job</button>
-    </form>
-  );
-}
 
 export default About;
