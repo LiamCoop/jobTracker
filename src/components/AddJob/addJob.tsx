@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createJob } from '../../api2';
-import styles from '../../styles/About.module.css';
+import styles from './AddJob.module.css';
 
 export const AddJobFold = () => {
   const [show, setShow] = useState(false);
@@ -9,8 +9,8 @@ export const AddJobFold = () => {
     <div className={styles.addJobFoldContainer}>
       <div className={styles.addJobIcon}>
         <div 
-          onClick={() => setShow(!show)} 
           className={styles.circle}
+          onClick={() => setShow(!show)} 
         >
           <p>+</p>
         </div>
@@ -46,6 +46,7 @@ const AddJobItem = ({ closeFold }) => {
     setLocation('');
     setLink('');
   }
+
   const fireCreateJob = () => createJob(
     title, 
     description, 
@@ -112,7 +113,7 @@ const AddJobItem = ({ closeFold }) => {
         onChange={e => setLocation(e.target.value)}
       />
       <input 
-        className={`${styles.input} ${styles.link}`}
+        className={`${styles.input} ${styles.inputLink}`}
         placeholder="Link"
         value={link}
         onChange={e => setLink(e.target.value)}
@@ -131,8 +132,8 @@ const AddJobItem = ({ closeFold }) => {
           onChange={e => setApplied(!applied)}
         />
         <label htmlFor="applied">Applied</label>
+        <button className={styles.addJobButton}>Add Job</button>
       </div>
-      <button className={styles.addJobButton}>Add Job</button>
     </form>
   );
 }

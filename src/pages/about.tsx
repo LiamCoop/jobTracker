@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/About.module.css";
 import { useJobs, updateJob, deleteJob } from '../api2';
 import { AddJobFold } from '../components/AddJob/addJob';
+import { JobItem } from '../components/Job/job';
 import { Job } from '../types';
 
 const About: NextPage = () => {
@@ -69,78 +70,5 @@ const LiveSearch: React.FC<{ jobs: Job[]}> = ({ jobs }) => {
     </div>
   )
 }
-
-const JobItem: React.FC<{ job: Job }> = ({ job }) => {
-  const [showMore, setShowMore] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-
-  return (
-    <>
-      <div className={styles.jobGrid}>
-        <div className={styles.jobAppliedDiv}>
-          <div 
-            className={styles.circle}
-            onDoubleClick={() => 
-              updateJob({ ...job, applied: !job.applied })
-            }
-          >
-            <p className={styles.jobAppliedSymbol}>{job.applied ? '✔' : '✕'}</p>
-          </div>
-          <p className={styles.jobAppliedText}>{`${job.applied ? '' : 'Not'} Applied`}</p>
-        </div>
-        <p className={styles.jobTitle}>{job.title}</p>
-        <div className={styles.jobFlexbox}>
-          <p className={styles.jobCompany}>{job.company}</p>
-          <p className={styles.jobLocation}>{job.location}</p>
-          {job.datePosted ? 
-            <p className={styles.jobDatePosted}>{job.datePosted}</p> : null}
-        </div>
-        <div className={styles.jobButtonDiv}>
-          <button 
-            className={styles.deleteButton} 
-            onClick={() => deleteJob(job.id)}
-          >
-            x
-          </button>
-          {isEditing ? (
-              <button 
-                className={styles.saveButton}
-                onClick={() => setIsEditing(false)}
-              >
-                Save
-              </button>
-            ) : ( <button 
-                className={styles.editButton} 
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </button> 
-            ) 
-          }
-        </div>
-        <p 
-          className={styles.carat} 
-          onClick={() => setShowMore(!showMore)}
-        >
-          ⌄
-        </p>
-      </div>
-      {showMore && 
-        <div className={styles.jobShowMore}>
-          {job.link ?
-            <a className={styles.jobLink} href={job.link} target="_blank">
-              {job.link} 
-            </a> : null}
-          {job.description ? 
-            <p className={styles.jobDescription}>{job.description}</p> : null}
-          {job.notes ? 
-            <p className={styles.notes}>{job.notes}</p> : null}
-        </div> 
-      }
-    </>
-  );
-}
-
-
 
 export default About;
