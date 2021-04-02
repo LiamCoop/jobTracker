@@ -47,7 +47,7 @@ const LiveSearch: React.FC<{ jobs: Job[]}> = ({ jobs }) => {
       setShow(display)
     }
     updateSearch()
-  }, [text])
+  }, [text, jobs])
 
   return(
     <div className={styles.liveSearchContainer}>
@@ -58,11 +58,11 @@ const LiveSearch: React.FC<{ jobs: Job[]}> = ({ jobs }) => {
         <input
           className={`${styles.input} ${styles.liveSearchInput}`}
           value={text}
-          placeholder="search jobs"
+          placeholder="Search Jobs"
           onChange={e => setText(e.target.value)}
         />
       </form>
-      {jobs.map((job) => (
+      {show.map((job) => (
         <JobItem key={job.id} job={job} />
       ))}
     </div>
@@ -130,7 +130,6 @@ const AddJobFold = () => {
         <div 
           onClick={() => setShow(!show)} 
           className={styles.circle}
-          style={{ cursor: 'pointer' }}
         >
           <p>+</p>
         </div>
