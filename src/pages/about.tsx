@@ -188,15 +188,6 @@ const AddJobItem = ({ closeFold }) => {
         closeFold()
       }}
     >
-      <div>
-        <input 
-          type="checkbox" 
-          checked={applied}
-          value="applied"
-          onChange={e => setApplied(!applied)}
-        />
-        <label htmlFor="applied">Applied</label>
-      </div>
       <input 
         className={`${styles.input} ${styles.inputCompany}`}
         placeholder="Company"
@@ -251,9 +242,17 @@ const AddJobItem = ({ closeFold }) => {
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
+      <div>
+        <input 
+          type="checkbox" 
+          checked={applied}
+          value="applied"
+          onChange={e => setApplied(!applied)}
+        />
+        <label htmlFor="applied">Applied</label>
+      </div>
       <button className={styles.addJobButton}>Add Job</button>
     </form>
-
   );
 }
 
