@@ -26,33 +26,23 @@ const About: NextPage = () => {
         <div className={styles.jobFoldDiv}>
           <AddJobFold />
         </div>
-        <LiveSearch jobs={jobs} />
+        <LiveSearch>
+          {jobs.map((job) => <JobItem key={job.id} job={job}/>)}  
+        </LiveSearch>
       </main>
 
     </div>
   );
 }
 
-const LiveSearch: React.FC<{ jobs: Job[]}> = ({ jobs }) => {
+const LiveSearch: React.FC<{ children: React.ReactNodeArray}> = 
+({ children }) => {
   const [text, setText] = useState('')
-  const [show, setShow] = useState(jobs);
 
-  useEffect(() => {
-    const updateSearch = () => {
-      const display = jobs.filter((job) => (
-        job.company.includes(text) ||  
-        job.title.includes(text) || 
-        job.description.includes(text) ||
-        job.notes.includes(text) || 
-        job.location.includes(text) || 
-        job.contact.includes(text) ||
-        job.datePosted.includes(text) ||
-        job.link.includes(text)
-      ))
-      setShow(display)
-    }
-    updateSearch()
-  }, [text, jobs])
+  const fitsQuery = (job: Job) => {
+    const regex = new RegExp(text);
+    return regex.test(Object.values(job).join())
+  }
 
   return(
     <div className={styles.liveSearchContainer}>
@@ -67,9 +57,8 @@ const LiveSearch: React.FC<{ jobs: Job[]}> = ({ jobs }) => {
           onChange={e => setText(e.target.value)}
         />
       </form>
-      {show.map((job) => (
-        <JobItem key={job.id} job={job} />
-      ))}
+      {children.map((child: React.ReactElement) => 
+        fitsQuery(child.props.job) ? child : null)}
     </div>
   )
 }
