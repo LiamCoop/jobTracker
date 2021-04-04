@@ -23,9 +23,18 @@
   grid-row: 1 / -1;
 }
 
+.jobCompany {
+  font-size: 16px;
+  font-weight: 500;
+}
+
 .jobAppliedText {
   font-size: 14px;
   margin: 0px;
+}
+.jobLocation {
+  font-size: 16px;
+  font-weight: 700px;
 }
 
 .jobTitle {
@@ -72,10 +81,7 @@
 .jobNotes {}
 
 .jobLink {
-  width: 100%;
   align-self: center;
-  display: inline-block;
-  text-overflow: ellipsis;
 }
 
 .carat {
@@ -99,21 +105,32 @@
 }
 
 .tag {
-  background-color: #eff4ff;
+  display: flex;
+  flex-direction: row;
+  cursor: default;
+  background-color: #e4ebfa;
   border: none;
-  color: #2557D6;
-  padding: 10px 20px;
+  opacity: 0.9;
+  color: #2531d6;
+  padding: 0px 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  margin-right: 13px;
-  margin-left: -1px;
-  margin-bottom: 10px;
   border-radius: 100px;
 }
 
-.tagDiv {
+.tagsDiv {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.tagRemove {
+  cursor: pointer;
+  padding-right: 5px;
+  font-size: 14px;
+}
+
+.tagText {
+  font-size: 14px;
 }

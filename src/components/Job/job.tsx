@@ -21,14 +21,18 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
           <p className={styles.jobAppliedText}>{`${job.applied ? '' : 'Not'} Applied`}</p>
         </div>
         <p className={styles.jobTitle}>{job.title}</p>
-        {job.company || job.location || job.datePosted ? (
+        {job.company || job.location || job.datePosted || job.link ? (
           <div className={styles.jobFlexbox}>
             {job.company ? 
               <p className={styles.jobCompany}>{job.company}</p> : null}
             {job.location ? 
               <p className={styles.jobLocation}>{job.location}</p> : null}
-            {job.datePosted ? 
-              <p className={styles.jobDatePosted}>{job.datePosted}</p> : null}
+            {job.link ?
+            <a 
+              className={styles.jobLink} 
+              href={job.link} 
+              target="_blank"
+            >🔗Job Posting🔗</a> : null}
           </div>) : null}
         <div className={styles.jobButtonDiv}>
           <button 
@@ -50,26 +54,31 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
       </div>
       {showMore && 
         <div className={styles.jobShowMore}>
-          {job.link ?
-            <a 
-              className={styles.jobLink} 
-              href={job.link} 
-              target="_blank"
-            >
-              {job.link}
-            </a> : null}
+          {job.tags !== [] ? <TagDisplay job={job} /> : null}
+          {job.datePosted ? 
+            <p className={styles.jobDatePosted}>{job.datePosted}</p> : null} 
           {job.description ? 
             <p className={styles.jobDescription}>{job.description}</p> : null}
           {job.notes ? 
             <p className={styles.notes}>{job.notes}</p> : null}
-          {job.tags !== [] ? (
-              <div className={styles.tagDiv}>
-                {job.tags.map((tag) => <p className={styles.tag}>{tag}</p>)}
-              </div>
-            ) : null}
         </div> 
       }
     </>
   );
 }
 
+const TagDisplay: React.FC<{ job: Job }>= ({ job }) => (
+ <div className={styles.tagsDiv}>
+    {job.tags.map((tag, idx) => 
+      <div className={styles.tag}>
+        <p 
+          className={styles.tagRemove}
+          onClick={() => updateJob( { ...job, 
+            tags: job.tags.filter((_, iidx) => idx !== iidx )}
+          )}
+        >x</p>
+        <p className={styles.tagText}>{tag}</p>
+      </div>
+      )}
+  </div>
+)
