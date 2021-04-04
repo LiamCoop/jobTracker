@@ -22,11 +22,17 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
         </div>
         <p className={styles.jobTitle}>{job.title}</p>
         {job.company || job.location || job.datePosted || job.link ? (
-          <div className={styles.jobFlexbox}>
-            {job.company ? 
-              <p className={styles.jobCompany}>{job.company}</p> : null}
-            {job.location ? 
-              <p className={styles.jobLocation}>{job.location}</p> : null}
+          <div className={styles.jobBottom}>
+            <div className={styles.jobFlexbox}>
+              {job.company || job.location ? (
+                <>
+                  {job.company ? 
+                    <p className={styles.jobCompany}>{job.company}</p> : null}
+                  {job.location ? 
+                    <p className={styles.jobLocation}>{job.location}</p> : null}
+                </>
+              ) : null}
+            </div>
             {job.link ?
               <a 
                 className={styles.jobLink} 
