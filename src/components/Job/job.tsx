@@ -70,7 +70,7 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
 const TagDisplay: React.FC<{ job: Job }>= ({ job }) => (
  <div className={styles.tagsDiv}>
     {job.tags.map((tag, idx) => 
-      <div className={styles.tag}>
+      <div key={tag} className={styles.tag}>
         <p 
           className={styles.tagRemove}
           onClick={() => updateJob( { ...job, 
