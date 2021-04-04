@@ -4,14 +4,7 @@
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: 
-    minmax(120px, 1fr) minmax(200px, 6fr) minmax(20px, 1fr);
-}
-
-.deleteButton, 
-.editButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    minmax(120px, 1fr) minmax(200px, 6fr) minmax(20px, 0.8fr);
 }
 
 .jobAppliedDiv {
@@ -61,11 +54,24 @@
 }
 
 .jobButtonDiv {
-  width: 50px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-self: center;
+}
+
+.deleteButton {
+  display: flex;
+}
+
+.chevronDiv {
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+}
+
+.chevronSVG {
+  cursor: pointer;
 }
 
 .jobShowMore {
@@ -86,14 +92,6 @@
   align-self: center;
 }
 
-.carat {
-  font-size: 20pt;
-  margin: 0px;
-  cursor: pointer;
-  justify-self: center;
-  align-self: flex-start;
-}
-
 .circle {
   display: flex;
   cursor: pointer;
@@ -101,6 +99,18 @@
   align-items: center;
   height: 25px;
   width: 25px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+.circleDelete {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
   border: 1px solid black;
   border-radius: 50%;
   margin: 2px;

@@ -61,6 +61,7 @@
 .inputTag__tags li button {
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
   appearance: none;
   background: #333333;
   border: none;
