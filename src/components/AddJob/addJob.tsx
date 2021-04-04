@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createJob } from '../../api2';
+import { useUser } from '@auth0/nextjs-auth0';
 import styles from './AddJob.module.css';
 
 export const AddJobFold = () => {
@@ -22,6 +23,8 @@ export const AddJobFold = () => {
 }
 
 const AddJobItem = ({ closeFold }) => {
+  const { user } = useUser();
+
   const [title, setTitle] = useState('')
   const [company, setCompany] = useState('')
   const [description, setDescription] = useState('')
@@ -34,9 +37,10 @@ const AddJobItem = ({ closeFold }) => {
   const [link, setLink] = useState('');
   const [tags, setTags] = useState([]);
   const handleTags = (arg: string[]) => setTags(arg)
-
+  
   const submitForm = () => {
     createJob(
+      user.sub,
       title, 
       description, 
       company, 
@@ -179,7 +183,7 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
       </div>
       <div className={styles.tagsContainer}>
         {tags.map((tag, idx) => (
-          <div className={styles.tagCont}>
+          <div key={tag} className={styles.tagCont}>
             <p className={styles.removeTag}
               onClick={() => handleTags(
                 tags.filter((t, iidx) => idx !== iidx))
