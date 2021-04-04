@@ -98,3 +98,22 @@
   margin: 2px;
 }
 
+.tag {
+  background-color: #eff4ff;
+  border: none;
+  color: #2557D6;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 13px;
+  margin-left: -1px;
+  margin-bottom: 10px;
+  border-radius: 100px;
+}
+
+.tagDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

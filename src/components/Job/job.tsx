@@ -21,12 +21,15 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
           <p className={styles.jobAppliedText}>{`${job.applied ? '' : 'Not'} Applied`}</p>
         </div>
         <p className={styles.jobTitle}>{job.title}</p>
-        <div className={styles.jobFlexbox}>
-          <p className={styles.jobCompany}>{job.company}</p>
-          <p className={styles.jobLocation}>{job.location}</p>
-          {job.datePosted ? 
-            <p className={styles.jobDatePosted}>{job.datePosted}</p> : null}
-        </div>
+        {job.company || job.location || job.datePosted ? (
+          <div className={styles.jobFlexbox}>
+            {job.company ? 
+              <p className={styles.jobCompany}>{job.company}</p> : null}
+            {job.location ? 
+              <p className={styles.jobLocation}>{job.location}</p> : null}
+            {job.datePosted ? 
+              <p className={styles.jobDatePosted}>{job.datePosted}</p> : null}
+          </div>) : null}
         <div className={styles.jobButtonDiv}>
           <button 
             className={styles.deleteButton} 
@@ -59,6 +62,11 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
             <p className={styles.jobDescription}>{job.description}</p> : null}
           {job.notes ? 
             <p className={styles.notes}>{job.notes}</p> : null}
+          {job.tags !== [] ? (
+              <div className={styles.tagDiv}>
+                {job.tags.map((tag) => <p className={styles.tag}>{tag}</p>)}
+              </div>
+            ) : null}
         </div> 
       }
     </>
