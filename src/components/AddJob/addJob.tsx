@@ -24,7 +24,7 @@ export const AddJobFold = () => {
 
 const AddJobItem = ({ closeFold }) => {
   const { user } = useUser();
-  let user_id = user ? user.sub : 'no user';
+  const user_id = user ? user.sub : 'no user';
 
   const [title, setTitle] = useState('')
   const [company, setCompany] = useState('')
@@ -103,7 +103,7 @@ const AddJobItem = ({ closeFold }) => {
         value={link}
         onChange={e => setLink(e.target.value)}
       />
-      <input 
+      <textarea 
         className={`${styles.input} ${styles.inputDescription}`}
         placeholder="Description"
         value={description}
@@ -142,14 +142,13 @@ const AddJobItem = ({ closeFold }) => {
           onChange={e => setApplied(!applied)}
         />
         <label htmlFor="applied">Applied</label>
-        <button className={styles.addJobButton} >
-          Add Job
-        </button>
       </div>
+      <button className={styles.addJobButton} >
+        Add Job
+      </button>
     </form>
   );
 }
-
 
 const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}> = 
 ({ tags, handleTags }) => {
@@ -161,41 +160,39 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
       handleTags(tags.filter((item, pos) => tags.indexOf(item) === pos))
       setUnique(true)
     }
-    if(!unique) resetUnique
-  }, [unique])
+    if(!unique) resetUnique()
+  }, [unique]);
 
   return (
-    <div className={styles.tagContainer}>
-      <div>
-        <input
-          className={styles.tagInput}
-          type="text"
-          placeholder="tags"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={(e) => {
-            if(e.key === 'Enter') {
-              handleTags([...tags, text])
-              setUnique(false)
-              setText('')
-            }
-          }}
-        />
-      </div>
-      <div className={styles.tagsContainer}>
+    <div className={styles.inputTag}>
+      <ul className={styles.inputTag__tags}>
         {tags.map((tag, idx) => (
-          <div key={tag} className={styles.tagCont}>
-            <p className={styles.removeTag}
+          <li key={tag}>
+            {tag}
+            <button 
+              type="button" 
               onClick={() => handleTags(
-                tags.filter((t, iidx) => idx !== iidx))
-              }
-            >
-              x
-            </p>
-            <p>{tag}</p>
-          </div>
+                tags.filter((t, iidx) => idx !== iidx)
+              )}
+            >+</button>
+          </li>
         ))}
-      </div>
+        <li className={styles.tagInput}>
+          <input
+            type="text"
+            placeholder="tags"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => {
+              if(e.key === 'Enter') {
+                handleTags([...tags, text])
+                setUnique(false)
+                setText('')
+              }
+            }}
+          />
+        </li>
+      </ul>
     </div>
-  )
+  );
 }

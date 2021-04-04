@@ -23,6 +23,67 @@
   justify-content: space-between;
 }
 
+/* TagsInput2 start */
+.inputTag {
+  background: white;
+  border: 1px solid #d6d6d6;
+  border-radius: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 5px 0;
+}
+
+.inputTag input {
+  border: none;
+  width: 100%;
+}
+
+.inputTag__tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.inputTag__tags li {
+  align-items: center;
+  background-color: #85a3bf;
+  color: #2531d6;
+  font-weight: 300;
+  list-style: none;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.inputTag__tags li button {
+  display: inline-flex;
+  align-items: center;
+  appearance: none;
+  background: #333333;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  height: 15px;
+  justify-content: center;
+  line-height: 0;
+  margin-left: 8px;
+  transform: rotate(45deg);
+  width: 15px;
+  padding: 0;
+}
+
+ul .tagInput {
+  align-self: center;
+  background: none;
+  flex-grow: 1;
+  padding: 0;
+}
+/* TagsInput2 end */
+
 .tagCont {
   display: flex;
   flex-direction: row;
@@ -41,11 +102,9 @@
   margin: 2px;
 }
 
+
 .addJob {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  display: grid;
 }
 
 .input {}
