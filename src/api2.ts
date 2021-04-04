@@ -6,6 +6,7 @@ const jobPath = "/api/jobs";
 export const useJobs = () => useSWR<Job[]>(jobPath);
 
 export const createJob = async ( 
+  user_id: string,
   title: string,
   description: string,
   company: string,
@@ -21,6 +22,7 @@ export const createJob = async (
   mutate(
     jobPath,
     jobPostings => [{ 
+      user_id,
       id: "new-job", 
       title, 
       description, 
@@ -39,6 +41,7 @@ export const createJob = async (
   await fetch(jobPath, {
     method: "POST",
     body: JSON.stringify({ 
+      user_id,
       title, 
       description, 
       company, 

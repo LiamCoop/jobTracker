@@ -18,6 +18,7 @@ model Todo {
 }
 
 model Job {
+  user_id     String
   id          String   @id @default(uuid())
   createdAt   DateTime @default(now())
   title       String

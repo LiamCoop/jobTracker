@@ -6,6 +6,7 @@ export interface Todo {
 }
 
 export interface Job {
+  user_id: string;
   id: string;
   createdAt: string;
   title: string;
