@@ -75,40 +75,16 @@ const AddJobItem = ({ closeFold }) => {
       }}
     >
       <input 
-        className={`${styles.input} ${styles.inputCompany}`}
-        placeholder="Company"
-        value={company}
-        onChange={e => setCompany(e.target.value)}
-      />
-      <input 
         className={`${styles.input} ${styles.inputTitle}`}
         placeholder="Title"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <input 
-        className={`${styles.input} ${styles.inputNotes}`}
-        placeholder="Notes"
-        value={notes}
-        onChange={e => setNotes(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputContact}`}
-        placeholder="Contact"
-        value={contact}
-        onChange={e => setContact(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputDatePosted}`}
-        placeholder="Post Date"
-        value={datePosted}
-        onChange={e => setDatePosted(e.target.value)}
-      />
-      <input 
-        className={`${styles.input} ${styles.inputDateClosed}`}
-        placeholder="Close Date"
-        value={dateClosed}
-        onChange={e => setDateClosed(e.target.value)}
+        className={`${styles.input} ${styles.inputCompany}`}
+        placeholder="Company"
+        value={company}
+        onChange={e => setCompany(e.target.value)}
       />
       <input 
         className={`${styles.input} ${styles.inputLocation}`}
@@ -128,10 +104,31 @@ const AddJobItem = ({ closeFold }) => {
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
+      <input 
+        className={`${styles.input} ${styles.inputDatePosted}`}
+        placeholder="Post Date"
+        value={datePosted}
+        onChange={e => setDatePosted(e.target.value)}
+      />
+      <input 
+        className={`${styles.input} ${styles.inputDateClosed}`}
+        placeholder="Close Date"
+        value={dateClosed}
+        onChange={e => setDateClosed(e.target.value)}
+      />
+      <input 
+        className={`${styles.input} ${styles.inputNotes}`}
+        placeholder="Notes"
+        value={notes}
+        onChange={e => setNotes(e.target.value)}
+      />
+      <input 
+        className={`${styles.input} ${styles.inputContact}`}
+        placeholder="Contact"
+        value={contact}
+        onChange={e => setContact(e.target.value)}
+      />
       <TagsInput tags={tags} handleTags={handleTags} />
-      <div style={{display: 'flex', flexDirection: 'row'}}>
-        {tags.map((tag)=><p>{tag}</p>)}
-      </div>
       <div>
         <input 
           type="checkbox" 
@@ -164,20 +161,36 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
 
   return (
     <div className={styles.tagContainer}>
-      <input
-        className={styles.tagInput}
-        type="text"
-        placeholder="tags"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        onKeyDown={(e) => {
-          if(e.key === 'Enter') {
-            handleTags([...tags, text])
-            setUnique(false)
-            setText('')
-          }
-        }}
-      />
+      <div>
+        <input
+          className={styles.tagInput}
+          type="text"
+          placeholder="tags"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => {
+            if(e.key === 'Enter') {
+              handleTags([...tags, text])
+              setUnique(false)
+              setText('')
+            }
+          }}
+        />
+      </div>
+      <div className={styles.tagsContainer}>
+        {tags.map((tag, idx) => (
+          <div className={styles.tagCont}>
+            <p className={styles.removeTag}
+              onClick={() => handleTags(
+                tags.filter((t, iidx) => idx !== iidx))
+              }
+            >
+              x
+            </p>
+            <p>{tag}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

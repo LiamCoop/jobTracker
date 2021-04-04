@@ -10,6 +10,24 @@
   align-self: center;
 }
 
+.removeTag {
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.tagsContainer {
+  display: flex;
+  width: 70%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tagCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .circle {
   display: flex;
