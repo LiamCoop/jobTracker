@@ -3,7 +3,9 @@ import { Job } from "./types";
 
 const jobPath = "/api/jobs";
 
-export const useJobs = () => useSWR<Job[]>(jobPath);
+export const useJobs = (user_id) => useSWR<Job[]>(
+  jobPath + (user_id ? '?user_id=' + user_id : '')
+);
 
 export const createJob = async ( 
   user_id: string,

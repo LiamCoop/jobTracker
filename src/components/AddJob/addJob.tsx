@@ -24,6 +24,7 @@ export const AddJobFold = () => {
 
 const AddJobItem = ({ closeFold }) => {
   const { user } = useUser();
+  let user_id = user ? user.sub : 'no user';
 
   const [title, setTitle] = useState('')
   const [company, setCompany] = useState('')
@@ -40,7 +41,7 @@ const AddJobItem = ({ closeFold }) => {
   
   const submitForm = () => {
     createJob(
-      user.sub,
+      user_id,
       title, 
       description, 
       company, 
