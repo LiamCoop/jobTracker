@@ -54,7 +54,7 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
       </div>
       {showMore && 
         <div className={styles.jobShowMore}>
-          {job.tags !== [] ? <TagDisplay job={job} /> : null}
+          {job.tags.length ? <TagDisplay job={job} /> : null}
           {job.datePosted ? 
             <p className={styles.jobDatePosted}>{job.datePosted}</p> : null} 
           {job.description ? 
