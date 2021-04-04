@@ -8,12 +8,6 @@
   justify-content: center;
 }
 
-.liveSearchContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .jobFoldDiv {
   align-self: center;
 }
