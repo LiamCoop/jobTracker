@@ -7,6 +7,7 @@ import { Todo } from "../types";
 
 export const TodoList: React.FC = () => {
   const { data: todos, error } = useTodos();
+  console.log(todos, error);
 
   if (error != null) return <div>Error loading todos...</div>;
   if (todos == null) return <div>Loading...</div>;
