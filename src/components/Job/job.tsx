@@ -22,7 +22,7 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
           <p className={styles.jobAppliedText}>{`${job.applied ? '' : 'Not '}Applied`}</p>
         </div>
         <p className={styles.jobTitle}>{job.title}</p>
-        {/*job.company || job.location || job.datePosted || job.link ? (*/}
+        {job.company || job.location || job.datePosted || job.link ? (
           <div className={styles.jobBottom}>
             <div className={styles.jobFlexbox}>
               {job.company ? 
@@ -37,14 +37,14 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
                 target="_blank"
               >🔗</a> : null}
           </div> 
-        {/*) : null*/}
+        ) : null}
         <div className={styles.jobButtonDiv}>
           <div onClick={() => deleteJob(job.id)} className={styles.circleDelete} >
-            {/*<DeleteSVG />*/}
+            <DeleteSVG />
           </div>
         </div>
         <div onClick={() => setShowMore(!showMore)} className={styles.chevronDiv} >
-          {/*<ChevronSVG />*/}
+          <ChevronSVG />
         </div>
       </div>
       {showMore && 
