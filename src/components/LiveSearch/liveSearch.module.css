@@ -4,3 +4,37 @@
   width: 90%;
 }
 
+.jobContainer {
+  margin-top: 10px;
+  align-self: center;
+  width: 98%;
+  display: grid;
+  grid-template-rows: auto;
+  row-gap: 10px;
+}
+
+.circle {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-left: none;
+  padding: 5px;
+  border-radius: 10px 0 0 10px;
+  
+}

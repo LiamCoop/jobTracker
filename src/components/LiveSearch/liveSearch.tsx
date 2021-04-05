@@ -4,18 +4,33 @@ import styles from './liveSearch.module.css';
 export const LiveSearch: React.FC<{ children: React.ReactNodeArray}> = 
 ({ children }) => {
   const [text, setText] = useState('')
+  const [showSearch, setShowSearch] = useState(false);
 
   return(
     <div className={styles.liveSearchContainer}>
-      <input
-        className={`${styles.input} ${styles.liveSearchInput}`}
-        value={text}
-        placeholder="Search Jobs"
-        onChange={e => setText(e.target.value)}
-      />
-      {children.map((child: React.ReactElement) => Object.values(child.props.job)
-        .join().toLowerCase().includes(text.toLowerCase()) ? 
-        child : null)}
+      <div className={styles.searchBar}
+        onMouseEnter={() => setShowSearch(true)}
+        onMouseLeave={() => setShowSearch(false)}
+      >
+        <div className={styles.circle} >
+          <svg height="24px" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        {showSearch && (
+          <input
+            className={styles.searchTerm}
+            value={text}
+            placeholder="Search Jobs"
+            onChange={e => setText(e.target.value)}
+          />
+        )}
+      </div>
+      <div className={styles.jobContainer}>
+        {children.map((child: React.ReactElement) => Object.values(child.props.job)
+          .join().toLowerCase().includes(text.toLowerCase()) ? 
+            child : null)}
+      </div>
     </div>
   )
 }
