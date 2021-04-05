@@ -13,6 +13,7 @@ const About: NextPage = () => {
   const { user } = useUser();
 
   const { data: jobs, error } = useJobs(user?.sub);
+  console.log(error);
 
   if (error != null) return <div>Error loading jobs...</div>
   if (jobs == null) return <div>Loading...</div>
