@@ -17,7 +17,9 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
               updateJob({ ...job, applied: !job.applied })
             }
           >
-            {job.applied ? '✔' : '✕'}
+            <p className={`${styles.applied} ${job.applied ? styles.applCheck : styles.applX}`}>
+              {job.applied ? '✔' : '✕'}
+            </p>
           </div>
           <p className={styles.jobAppliedText}>{`${job.applied ? '' : 'Not '}Applied`}</p>
         </div>
