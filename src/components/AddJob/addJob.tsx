@@ -7,18 +7,16 @@ export const AddJobFold = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <div className={styles.addJobFoldContainer}>
+    <>
       <div className={styles.addJobIcon}>
         <div 
           className={styles.circle}
           onClick={() => setShow(!show)} 
-        >
-          <p>+</p>
-        </div>
+        >+</div>
         <p>Add a job</p>
       </div>
       {show && <AddJobItem closeFold={() => {setShow(false)}} /> }
-    </div>
+    </>
   )
 }
 
