@@ -1,6 +1,5 @@
 import React, { useState} from "react";
 import styles from './liveSearch.module.css';
-import { Job } from '../../types';
 
 export const LiveSearch: React.FC<{ children: React.ReactNodeArray}> = 
 ({ children }) => {
