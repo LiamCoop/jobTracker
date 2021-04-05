@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../styles/About.module.css";
 import { useJobs } from '../api2';
 import { AddJobFold } from '../components/AddJob/addJob';
