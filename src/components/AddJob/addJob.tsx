@@ -7,7 +7,7 @@ export const AddJobFold = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.addJobIcon}>
         <div 
           className={styles.circle}
@@ -16,7 +16,7 @@ export const AddJobFold = () => {
         <p className={styles.addJobText}>Add a job</p>
       </div>
       {show && <AddJobItem closeFold={() => {setShow(false)}} /> }
-    </>
+    </div>
   )
 }
 
@@ -79,7 +79,7 @@ const AddJobItem = ({ closeFold }) => {
     >
       <input 
         className={`${styles.input} ${styles.inputTitle}`}
-        placeholder="Title"
+        placeholder="Job Title"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
@@ -101,21 +101,16 @@ const AddJobItem = ({ closeFold }) => {
         value={link}
         onChange={e => setLink(e.target.value)}
       />
-      <textarea 
-        className={`${styles.input} ${styles.inputDescription}`}
-        placeholder="Description"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      />
+      
       <input 
         className={`${styles.input} ${styles.inputDatePosted}`}
-        placeholder="Post Date"
+        placeholder="Posting Date"
         value={datePosted}
         onChange={e => setDatePosted(e.target.value)}
       />
       <input 
         className={`${styles.input} ${styles.inputDateClosed}`}
-        placeholder="Close Date"
+        placeholder="Closing Date"
         value={dateClosed}
         onChange={e => setDateClosed(e.target.value)}
       />
@@ -125,24 +120,35 @@ const AddJobItem = ({ closeFold }) => {
         value={notes}
         onChange={e => setNotes(e.target.value)}
       />
-      <input 
+      {/*<input 
         className={`${styles.input} ${styles.inputContact}`}
         placeholder="Contact"
         value={contact}
         onChange={e => setContact(e.target.value)}
-      />
+      />*/}
       <TagsInput tags={tags} handleTags={handleTags} />
-      <div>
+      <textarea 
+        className={`${styles.input} ${styles.inputDescription}`}
+        placeholder="Description"
+        value={description}
+        onChange={e => setDescription(e.target.value)}
+      />
+      <div className={styles.checkboxDiv}>
         <input 
           type="checkbox" 
+          className={styles.checkbox}
           checked={applied}
           value="applied"
           onChange={e => setApplied(!applied)}
         />
-        <label htmlFor="applied">Applied</label>
+        <label htmlFor="applied">
+          <p className={styles.appliedText}>Applied</p>
+        </label>
       </div>
       <button className={styles.addJobButton} >
-        Add Job
+        <p className={styles.addJobButtonText}>
+          Add Job
+        </p>
       </button>
     </form>
   );
@@ -160,19 +166,20 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={(e) => {
-          if(e.key === 'Enter') {
+          if(e.key === 'Enter' && text) {
             handleTags(Array.from(new Set([...tags, text])))
+            setText('')
           }
         }}
       />
       <div className={styles.tagsDiv}>
-        {tags.map((tag: string) => (
+        {tags.map((tag, iidx) => (
           <div className={styles.tag} key={tag}>
             <p 
               className={styles.tagRemove}
               onClick={() => handleTags(
-                Array.from(new Set([...tags , text])))
-              }
+                tags.filter((t, idx) => idx !== iidx)
+              )}
             >x</p>
             <p className={styles.tagText}>{tag}</p>
           </div>
