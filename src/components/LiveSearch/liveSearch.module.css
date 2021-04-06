@@ -1,40 +1,40 @@
 .liveSearchContainer {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
+}
+
+.searchBar {
+  display: flex;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px 0 0 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.searchTerm {
+  border: 3px solid #00B4CC;
+  border-left: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 0px 5px 5px 0px;
+  outline: none;
+  color: #9DBFAF;
 }
 
 .jobContainer {
   margin-top: 10px;
   align-self: center;
-  width: 98%;
   display: grid;
   grid-template-rows: auto;
   row-gap: 10px;
-}
-
-.circle {
-  display: flex;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  height: 35px;
-  width: 35px;
-  border: 2px solid black;
-  border-radius: 50%;
-  margin: 2px;
-}
-
-.searchBar {
-  display: flex;
-  flex-direction: row;
-}
-
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-left: none;
-  padding: 5px;
-  border-radius: 10px 0 0 10px;
-  
+  border-radius: 4px;
 }
