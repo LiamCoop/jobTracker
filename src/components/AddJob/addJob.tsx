@@ -151,15 +151,6 @@ const AddJobItem = ({ closeFold }) => {
 const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}> = 
 ({ tags, handleTags }) => {
   const [text, setText] = useState('');
-  const [unique, setUnique] = useState(true);
-
-  useEffect(() => {
-    const resetUnique = () => {
-      handleTags(tags.filter((item, pos) => tags.indexOf(item) === pos))
-      setUnique(true)
-    }
-    if(!unique) resetUnique()
-  }, [unique]);
 
   return (
     <div className={styles.inputTag}>
@@ -183,9 +174,7 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => {
               if(e.key === 'Enter') {
-                handleTags([...tags, text])
-                setUnique(false)
-                setText('')
+                handleTags(Array.from(new Set([...tags, text])))
               }
             }}
           />

@@ -65,18 +65,54 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
   );
 }
 
-const TagDisplay: React.FC<{ job: Job }>= ({ job }) => (
- <div className={styles.tagsDiv}>
-    {job.tags.map((tag, idx) => 
-      <div key={tag} className={styles.tag}>
-        <p 
-          className={styles.tagRemove}
-          onClick={() => updateJob( { ...job, 
-            tags: job.tags.filter((_, iidx) => idx !== iidx )}
-          )}
-        >x</p>
-        <p className={styles.tagText}>{tag}</p>
-      </div>
+const TagDisplay: React.FC<{ job: Job }>= ({ job }) => {
+  const [hover, setHover] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+  const [text, setText] = useState('');
+
+  const handleKeyDown = (e) => {
+    if(e.key === 'Enter'){
+      updateJob({ ...job, tags: Array.from(new Set ([...job.tags, text]))})
+      setText('')
+      setShowInput(false)
+    }
+  }
+
+  return (
+    <div 
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => {
+        setHover(false)
+        setShowInput(false)
+      }}
+      className={styles.tagsDiv}
+    >
+      {job.tags.map((tag, idx) => 
+        <div key={tag} className={styles.tag}>
+          <p 
+            className={styles.tagRemove}
+            onClick={() => updateJob( { ...job, 
+              tags: job.tags.filter((_, iidx) => idx !== iidx )}
+            )}
+          >x</p>
+          <p className={styles.tagText}>{tag}</p>
+        </div>
       )}
-  </div>
-)
+      {hover && 
+        <div onClick={() => setShowInput(true)}
+          className={styles.tag}
+        >
+          {showInput ? 
+            <input 
+              className={styles.addTagInput}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="tag"
+              onKeyDown={handleKeyDown}
+            /> : <p className={styles.addTagText}>+</p>
+          }
+        </div >
+      }
+    </div>
+  )
+}
