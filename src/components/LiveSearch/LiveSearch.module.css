@@ -10,36 +10,40 @@
   flex-direction: row;
 }
 
+.searchTerm {
+  border: 3px solid black;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  min-width: 120px;
+  width: 15vw;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: black;
+  opacity: 1;
+}
+
+.searchTerm::placeholder {
+  opacity: 0.8;
+  color: black;
+}
+
 .searchButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 36px;
   border: 1px solid black;
   background: black;
-  text-align: center;
   color: #fff;
-  border-radius: 5px 0 0 5px;
-  font-size: 20px;
-}
-
-.searchTerm {
-  border: 3px solid black;
-  border-left: none;
-  padding: 5px;
-  height: 36px;
-  border-radius: 0px 5px 5px 0px;
-  outline: none;
-  color: #9DBFAF;
+  border-radius: 0 5px 5px 0;
 }
 
 .jobContainer {
   width: 100%;
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
   align-self: center;
-  display: grid;
-  grid-template-rows: auto;
-  row-gap: 10px;
+  gap: 10px;
+  margin-top: 10px;
   border-radius: 4px;
 }
