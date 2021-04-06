@@ -153,33 +153,31 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
   const [text, setText] = useState('');
 
   return (
-    <div className={styles.inputTag}>
-      <ul className={styles.inputTag__tags}>
-        {tags.map((tag, idx) => (
-          <li key={tag}>
-            {tag}
-            <button 
-              type="button" 
+    <>
+      <input
+        className={styles.addTagInput}
+        placeholder="tags"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if(e.key === 'Enter') {
+            handleTags(Array.from(new Set([...tags, text])))
+          }
+        }}
+      />
+      <div className={styles.tagsDiv}>
+        {tags.map((tag: string) => (
+          <div className={styles.tag} key={tag}>
+            <p 
+              className={styles.tagRemove}
               onClick={() => handleTags(
-                tags.filter((t, iidx) => idx !== iidx)
-              )}
-            >+</button>
-          </li>
-        ))}
-        <li className={styles.tagInput}>
-          <input
-            type="text"
-            placeholder="tags"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={(e) => {
-              if(e.key === 'Enter') {
-                handleTags(Array.from(new Set([...tags, text])))
+                Array.from(new Set([...tags , text])))
               }
-            }}
-          />
-        </li>
-      </ul>
-    </div>
+            >x</p>
+            <p className={styles.tagText}>{tag}</p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
