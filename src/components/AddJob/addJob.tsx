@@ -13,7 +13,7 @@ export const AddJobFold = () => {
           className={styles.circle}
           onClick={() => setShow(!show)} 
         >+</div>
-        <p>Add a job</p>
+        <p className={styles.addJobText}>Add a job</p>
       </div>
       {show && <AddJobItem closeFold={() => {setShow(false)}} /> }
     </>
