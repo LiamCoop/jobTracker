@@ -1,7 +1,6 @@
 .jobContainer {
   border: 1px solid black;
   border-radius: 8px;
-  border: 1px solid black;
   padding: 2px;
 }
 
@@ -157,11 +156,10 @@
 }
 
 .tag {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
-  cursor: default;
   background-color: #e4ebfa;
-  border: none;
   opacity: 0.9;
   color: #2531d6;
   padding: 5px 15px;
@@ -185,17 +183,22 @@
 
 
 .addTagInput {
+  cursor: text;
   width: 5vw;
-  border: none;
   background-color: #e4ebfa;
-  color: #2531d6;
   opacity: 0.9;
-  border-bottom: 1px solid black;
+  border: none;
+  color: #2531d6;
+}
+
+.addTagInput:focus {
+  outline: none;
 }
 
 .addTagInput::placeholder {
+  background-color: #e4ebfa;
   color: #2531d6;
-  opacity: 1;
+  opacity: 0.6;
 }
 
 

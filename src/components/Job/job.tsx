@@ -4,7 +4,10 @@ import { updateJob, deleteJob } from '../../api2';
 import { Job } from '../../types';
 import { DeleteSVG, ChevronSVG } from '../svgs/svgs';
 
-export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
+export const JobItem: React.FC<{ 
+  job: Job, 
+  searchTag: (tag: string) => void 
+}> = ({ job, searchTag }) => {
   const [showMore, setShowMore] = useState(false);
   
   return (
@@ -52,7 +55,7 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
       </div>
       {showMore && 
         <div className={styles.jobShowMore}>
-          {job.tags.length ? <TagDisplay job={job} /> : null}
+          {job.tags.length ? <TagDisplay job={job} searchTag={searchTag} /> : null}
           {job.description ? 
             <p className={styles.jobDescription}>
               {job.description}
@@ -65,14 +68,19 @@ export const JobItem: React.FC<{ job: Job }> = ({ job }) => {
   );
 }
 
-const TagDisplay: React.FC<{ job: Job }>= ({ job }) => {
+const TagDisplay: React.FC<{ 
+  job: Job,
+  searchTag: (tag: string) => void 
+}> = ({ job, searchTag }) => {
   const [hover, setHover] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [text, setText] = useState('');
 
   const handleKeyDown = (e) => {
     if(e.key === 'Enter'){
-      updateJob({ ...job, tags: Array.from(new Set ([...job.tags, text]))})
+      updateJob(
+        { ...job, tags: Array.from(new Set ([...job.tags, text]))}
+      )
       setText('')
       setShowInput(false)
     }
@@ -80,34 +88,45 @@ const TagDisplay: React.FC<{ job: Job }>= ({ job }) => {
 
   return (
     <div 
+      className={styles.tagsDiv}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
         setHover(false)
         setShowInput(false)
+        setText('')
       }}
-      className={styles.tagsDiv}
     >
       {job.tags.map((tag, idx) => 
-        <div key={tag} className={styles.tag}>
+        <div 
+          className={styles.tag} 
+          onClick={() => searchTag(tag)}
+          key={tag} 
+        >
           <p 
             className={styles.tagRemove}
-            onClick={() => updateJob( { ...job, 
-              tags: job.tags.filter((_, iidx) => idx !== iidx )}
-            )}
+            onClick={(e) => {
+              e.stopPropagation()
+              updateJob({ ...job, tags: 
+                job.tags.filter((t, iidx) => idx !== iidx )
+              })
+            }}
           >x</p>
           <p className={styles.tagText}>{tag}</p>
         </div>
       )}
       {hover && 
-        <div onClick={() => setShowInput(true)}
+        <div 
+          onClick={() => setShowInput(true)}
           className={styles.tag}
+          style={showInput ? {cursor: 'default'}: {}}
         >
           {showInput ? 
             <input 
+              autoFocus
               className={styles.addTagInput}
               value={text}
-              onChange={(e) => setText(e.target.value)}
               placeholder="tag"
+              onChange={(e) => setText(e.target.value)}
               onKeyDown={handleKeyDown}
             /> : <p className={styles.addTagText}>+</p>
           }
