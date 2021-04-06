@@ -30,9 +30,11 @@ const About: NextPage = () => {
         <div className={styles.jobFoldDiv}>
           <AddJobFold />
         </div>
-        <LiveSearch>
-          {jobs.map((job) => <JobItem key={job.id} job={job}/>)}  
-        </LiveSearch>
+        <div className={styles.liveSearchContainer}>
+          <LiveSearch>
+            {jobs.map((job) => <JobItem key={job.id} job={job}/>)}  
+          </LiveSearch>
+        </div>
       </main>
 
     </div>
