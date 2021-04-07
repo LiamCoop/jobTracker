@@ -13,10 +13,16 @@ export const Header = () => {
       <div className={styles.linkContainer}>
         {user ? (
           <a href="/api/auth/logout?returnTo=http%3A@2F@2Flocalhost:3000">
-            Logout
+            <div className={styles.logDiv}>
+              <p className={styles.login}>Logout</p>
+            </div>
           </a>
         ) : (
-          <a href="/api/auth/login">Login</a>
+          <a href="/api/auth/login">
+            <div className={styles.logDiv}>
+              <p className={styles.logout}>Login</p>
+            </div>
+          </a>
         )}
       </div>
       <div className={styles.userContainer}>
