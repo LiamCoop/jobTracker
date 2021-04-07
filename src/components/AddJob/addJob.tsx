@@ -77,6 +77,18 @@ const AddJobItem = ({ closeFold }) => {
         submitForm()
       }}
     >
+      <div className={styles.checkboxDiv}>
+        <input 
+          type="checkbox" 
+          className={styles.checkbox}
+          checked={applied}
+          value="applied"
+          onChange={e => setApplied(!applied)}
+        />
+        <label htmlFor="applied">
+          <p className={styles.appliedText}>Applied</p>
+        </label>
+      </div>
       <input 
         className={`${styles.input} ${styles.inputTitle}`}
         placeholder="Job Title"
@@ -101,7 +113,6 @@ const AddJobItem = ({ closeFold }) => {
         value={link}
         onChange={e => setLink(e.target.value)}
       />
-      
       <input 
         className={`${styles.input} ${styles.inputDatePosted}`}
         placeholder="Posting Date"
@@ -126,24 +137,25 @@ const AddJobItem = ({ closeFold }) => {
         value={contact}
         onChange={e => setContact(e.target.value)}
       />*/}
-      <TagsInput tags={tags} handleTags={handleTags} />
       <textarea 
         className={`${styles.input} ${styles.inputDescription}`}
         placeholder="Description"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
-      <div className={styles.checkboxDiv}>
-        <input 
-          type="checkbox" 
-          className={styles.checkbox}
-          checked={applied}
-          value="applied"
-          onChange={e => setApplied(!applied)}
-        />
-        <label htmlFor="applied">
-          <p className={styles.appliedText}>Applied</p>
-        </label>
+      <TagsInput tags={tags} handleTags={handleTags} />
+      <div className={styles.tagsDiv}>
+        {tags.map((tag, iidx) => (
+          <div className={styles.tag} key={tag}>
+            <p 
+              className={styles.tagRemove}
+              onClick={() => handleTags(
+                tags.filter((t, idx) => idx !== iidx)
+              )}
+            >x</p>
+            <p className={styles.tagText}>{tag}</p>
+          </div>
+        ))}
       </div>
       <button className={styles.addJobButton} >
         <p className={styles.addJobButtonText}>
@@ -172,19 +184,7 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
           }
         }}
       />
-      <div className={styles.tagsDiv}>
-        {tags.map((tag, iidx) => (
-          <div className={styles.tag} key={tag}>
-            <p 
-              className={styles.tagRemove}
-              onClick={() => handleTags(
-                tags.filter((t, idx) => idx !== iidx)
-              )}
-            >x</p>
-            <p className={styles.tagText}>{tag}</p>
-          </div>
-        ))}
-      </div>
+      
     </>
   );
 }

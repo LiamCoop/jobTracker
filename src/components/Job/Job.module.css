@@ -2,7 +2,7 @@
   width: 100%;
   align-self: center;
   background-color: #F2F2F8;
-  border: 3px solid #333333;
+  border: 2px solid #141414;
   border-radius: 8px;
 }
 
@@ -20,8 +20,8 @@
   align-items: center;
   height: 30px;
   width: 30px;
-  background-color: #E4E4F1;
-  border: 2px solid #333333;
+  background-color: #F2F2F8;
+  border: 2px solid #141414;
   border-radius: 50%;
   margin: 2px;
 }
@@ -116,10 +116,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #E4E4F1;
+  background-color: #F2F2F8;
   height: 26px;
   width: 26px;
-  border: 2px solid #333333;
+  border: 2px solid #141414;
   border-radius: 50%;
   margin: 2px;
   cursor: pointer;
@@ -165,6 +165,7 @@
 }
 
 .tagsDiv {
+  height: 30px;
   padding: 5px;
   display: flex;
   flex-wrap: wrap;
@@ -175,8 +176,8 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  background-color: #E4E4F1;
-  border: 1px solid #333333;
+  background-color: #F2F2F8;
+  border: 1px solid #141414;
   padding: 5px 15px;
   margin: 0px;
   border-radius: 100px;
@@ -203,8 +204,7 @@
 .addTagInput {
   cursor: text;
   width: 5vw;
-  background-color: #e4ebfa;
-  opacity: 0.9;
+  background-color: #F2F2F8;
   border: none;
   color: #333333;
 }
@@ -214,7 +214,7 @@
   color: #333333;
 }
 
-.addTagInput::-moz-placeholder {  /* Firefox 19+ */
+.addTagInput::-moz-placeholder {
   text-align: center;  
   color: #333333;
 }

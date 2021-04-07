@@ -17,7 +17,7 @@
 }
 
 .searchTerm {
-  border: 3px solid black;
+  border: 3px solid #333333;
   border-right: none;
   padding: 5px;
   height: 36px;
@@ -25,14 +25,29 @@
   width: 15vw;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: black;
+  color: #333333;
+  background-color: #F2F2F8;
   opacity: 1;
 }
 
-.searchTerm::placeholder {
+.searchTerm::-webkit-input-placeholder {
+  text-align: start; 
+  color: #333333;
   opacity: 0.8;
-  color: black;
 }
+
+.searchTerm::-moz-placeholder {
+  opacity: 0.8;
+  text-align: start; 
+  color: #333333;
+}
+
+.searchTerm:-ms-input-placeholder {
+  opacity: 0.8;
+  text-align: start; 
+  color: #333333;
+}
+
 
 .tagContainer {
   justify-self: flex-end;
@@ -43,9 +58,8 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  background-color: #e4ebfa;
+  background-color: #F2F2F8;
   opacity: 0.9;
-  color: #2531d6;
   padding: 5px 15px;
   margin: 0px;
   border-radius: 100px;
@@ -53,6 +67,7 @@
 
 .tagText {
   font-size: 14px;
+  font-weight: 500;
   align-self: center;
   margin: 0;
 }
@@ -69,9 +84,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  background: black;
-  color: #fff;
+  border: 1px solid #333333;
+  background: #333333;
+  color: #F2F2F8;
   border-radius: 0 5px 5px 0;
 }
 

@@ -10,7 +10,7 @@ export const LiveSearch: React.FC<{ jobs: Job[]}> =
   const [show, setShow] = useState(jobs);
   const [text, setText] = useState('')
   const [tag, setTag] = useState(null);
-  const [tags, setTags] = useState(jobs.flatMap((job: Job) => job.tags));
+  // const [tags, setTags] = useState(jobs.flatMap((job: Job) => job.tags));
 
   // adjust if a tag is clicked (to show those with that tag)
   const searchTag = (argtag: string) => {
@@ -31,7 +31,6 @@ export const LiveSearch: React.FC<{ jobs: Job[]}> =
     }
     setShow(tryshow)
   }, [tag, text, jobs])
-
   
   return(
     <div className={styles.liveSearchContainer}>
