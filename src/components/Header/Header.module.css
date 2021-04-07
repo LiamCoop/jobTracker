@@ -17,13 +17,14 @@
 }
 
 .logDiv {
-  border: 2px solid #333333;
+  border: 3px solid #333333;
   border-radius: 10px;
 }
 
 .login, 
 .logout {
   margin: 8px;
+  font-weight: 600;
   color: #333333;
 }
 

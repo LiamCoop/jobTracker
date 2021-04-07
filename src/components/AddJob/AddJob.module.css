@@ -50,6 +50,7 @@
   border-radius: 8px;
   background-color: #F2F2F8;
   height: 28px;
+  text-align: center;
 }
 
 .addJobMain {
@@ -118,11 +119,11 @@
 }
 
 .tagsDiv {
-  height: 15px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 10px;
+  gap: 2px;
 }
 
 .tag {

@@ -49,7 +49,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   padding-left: 2%;
   grid-row: 1 / -1;
 }
@@ -149,6 +148,13 @@
 .jobNotes {
   color: #333333;
   font-size: 16px;
+  padding: 0 15px;
+}
+
+.jobContact {
+  color: #333333;
+  font-size: 16px;
+  padding: 0 15px;
 }
 
 .jobLinkDiv {
@@ -179,7 +185,7 @@
   display: flex;
   flex-direction: row;
   background-color: #F2F2F8;
-  border: 1px solid #141414;
+  border: 1px solid #333333;
   padding: 5px 15px;
   margin: 0px;
   border-radius: 100px;
@@ -204,10 +210,10 @@
 
 .header {
   font-size: 20px;
-  align-self: center;
   margin: 4px 0;
+  padding: 0px 15px;
   font-weight: 500;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #333333;
 }
 
 .addTagInput {

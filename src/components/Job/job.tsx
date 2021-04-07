@@ -9,7 +9,7 @@ export const JobItem: React.FC<{
   searchTag: (tag: string) => void 
 }> = ({ job, searchTag }) => {
   const [showMore, setShowMore] = useState(false);
-  
+
   return (
     <div className={styles.jobContainer}>
       <div className={styles.jobGrid}>
@@ -66,7 +66,12 @@ export const JobItem: React.FC<{
           {job.notes ? 
             <>
               <h1 className={styles.header}>Notes</h1>
-              <p className={styles.notes}>{job.notes}</p>
+              <p className={styles.jobNotes}>{job.notes}</p>
+            </> : null}
+          {job.contact ? 
+            <>
+              <h1 className={styles.header}>Contact</h1>
+              <p className={styles.jobContact}>{job.contact}</p>
             </> : null}
         </div>
       }

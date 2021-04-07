@@ -44,8 +44,8 @@ const AddJobItem = ({ closeFold }) => {
       description, 
       company, 
       applied, 
-      contact, 
       notes,
+      contact, 
       datePosted,
       dateClosed,
       location,
@@ -131,12 +131,12 @@ const AddJobItem = ({ closeFold }) => {
         value={notes}
         onChange={e => setNotes(e.target.value)}
       />
-      {/*<input 
+      <input 
         className={`${styles.input} ${styles.inputContact}`}
         placeholder="Contact"
         value={contact}
         onChange={e => setContact(e.target.value)}
-      />*/}
+      />
       <textarea 
         className={`${styles.input} ${styles.inputDescription}`}
         placeholder="Description"
