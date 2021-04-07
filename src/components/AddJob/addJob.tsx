@@ -161,7 +161,7 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
   return (
     <>
       <input
-        className={styles.addTagInput}
+        className={`${styles.input} ${styles.addTagInput}`}
         placeholder="tags"
         value={text}
         onChange={(e) => setText(e.target.value)}
