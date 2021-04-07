@@ -57,11 +57,17 @@ export const JobItem: React.FC<{
         <div className={styles.jobShowMore}>
           <TagDisplay job={job} searchTag={searchTag} />
           {job.description ? 
-            <p className={styles.jobDescription}>
-              {job.description}
-            </p> : null}
+            <>
+              <h1 className={styles.header}>Job Description</h1>
+              <p className={styles.jobDescription}>
+                {job.description}
+              </p>
+            </> : null}
           {job.notes ? 
-            <p className={styles.notes}>{job.notes}</p> : null}
+            <>
+              <h1 className={styles.header}>Notes</h1>
+              <p className={styles.notes}>{job.notes}</p>
+            </> : null}
         </div>
       }
     </div>

@@ -1,12 +1,10 @@
 .headerContainer {
+  width: 100%;
+  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.linkContainer {
-  display: flex;
-  flex-direction: column;
+  background-color: #F2F2F8;
 }
 
 .userContainer {
@@ -15,6 +13,7 @@
   grid-template-rows: 1fr 1fr;
   justify-content: center;
   align-items: center;
+  background-color: #F2F2F8;
 }
 
 .userName {
@@ -28,6 +27,7 @@
 }
 
 .userAvatar {
+  border: 3px solid #333333;
   border-radius: 50%;
   width: 40px;
   height: 40px;

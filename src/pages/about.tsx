@@ -24,9 +24,9 @@ const About: NextPage = () => {
         <title>About</title>
       </Head>
       
-      <Header />
 
       <main className={styles.main}>
+        <Header />
         <AddJobFold />
         <div className={styles.liveSearchContainer}>
           <LiveSearch jobs={jobs} />
