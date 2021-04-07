@@ -1,11 +1,17 @@
 .liveSearchContainer {
+  width: 95%;
   padding-top: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.searchGroup {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 }
 
 .searchBar {
-  align-self: center;
   display: flex;
   flex-direction: row;
 }
@@ -26,6 +32,37 @@
 .searchTerm::placeholder {
   opacity: 0.8;
   color: black;
+}
+
+.tagContainer {
+  justify-self: flex-end;
+  align-self: center;
+}
+
+.tag {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  background-color: #e4ebfa;
+  opacity: 0.9;
+  color: #2531d6;
+  padding: 5px 15px;
+  margin: 0px;
+  border-radius: 100px;
+}
+
+.tagText {
+  font-size: 14px;
+  align-self: center;
+  margin: 0;
+}
+
+.tagRemove {
+  cursor: pointer;
+  padding-right: 5px;
+  font-size: 18px;
+  align-self: center;
+  margin: 0;
 }
 
 .searchButton {
