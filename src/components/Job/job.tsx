@@ -34,7 +34,7 @@ export const JobItem: React.FC<{
             {job.location ? 
               <p className={styles.jobLocation}>{job.location}</p> : null}
             {job.datePosted ? 
-              <p className={styles.jobdatePosted}>{job.datePosted}</p> : null}
+              <p className={styles.jobDatePosted}>{job.datePosted}</p> : null}
           </div>
           <div onClick={() => setShowMore(!showMore)} className={styles.chevronDiv} >
             <ChevronSVG />
