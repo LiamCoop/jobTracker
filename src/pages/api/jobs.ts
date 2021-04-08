@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       where: { user_id: req.query.user_id },
       orderBy: { createdAt: "desc"},
     });
-    res.json(jobs);
+    res.json(req.query.user_id ? jobs : []);
   } else if (req.method === "POST") {
     // create posting
     const data = JSON.parse(req.body);

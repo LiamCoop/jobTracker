@@ -28,10 +28,12 @@ const About: NextPage = () => {
 
       <main className={styles.main}>
         <Header />
-        <AddJobFold />
-        <div className={styles.liveSearchContainer}>
-          <LiveSearch jobs={jobs} />
-        </div>
+        {user && <>
+          <AddJobFold />
+          <div className={styles.liveSearchContainer}>
+            <LiveSearch jobs={jobs} />
+          </div>
+        </>}
       </main>
 
     </div>
