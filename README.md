@@ -26,6 +26,7 @@ Each job has room for the following contents:
 # Features
 
 Filter jobs using a live search.
+
 Jobs can also be filtered by way of tags, which can be added to jobs both on creation, and after the fact.
 
 
