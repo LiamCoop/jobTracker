@@ -35,6 +35,11 @@ export const LiveSearch: React.FC<{ jobs: Job[]}> =
   return(
     <div className={styles.liveSearchContainer}>
       <div className={styles.searchGroup}>
+        {tag && <div className={styles.tagContainer}>
+          <div className={styles.tag} onClick={() => searchTag(tag)}>
+            <p className={styles.tagText}>{tag}</p>
+          </div>
+        </div>}
         <div className={styles.searchBar}>
           <input
             className={styles.searchTerm}
@@ -48,11 +53,7 @@ export const LiveSearch: React.FC<{ jobs: Job[]}> =
             </svg>
           </button>
         </div>
-        {tag && <div className={styles.tagContainer}>
-          <div className={styles.tag} onClick={() => searchTag(tag)}>
-            <p className={styles.tagText}>{tag}</p>
-          </div>
-        </div>}
+        
       </div>
       <div className={styles.jobContainer}>
         {show.map((job) => 

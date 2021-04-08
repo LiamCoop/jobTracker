@@ -7,8 +7,14 @@
 }
 
 .searchGroup {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.tagContainer {
+  align-self: center;
 }
 
 .searchBar {
@@ -46,12 +52,6 @@
   opacity: 0.8;
   text-align: start; 
   color: #333333;
-}
-
-
-.tagContainer {
-  justify-self: flex-end;
-  align-self: center;
 }
 
 .tag {
