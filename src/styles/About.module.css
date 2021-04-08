@@ -23,5 +23,6 @@
 }
 
 .liveSearchContainer {
-  width: 60%;
+  width: 70%;
+  max-width: 750px; 
 }

@@ -33,8 +33,6 @@ export const JobItem: React.FC<{
               <p className={styles.jobCompany}>{job.company}</p> : null}
             {job.location ? 
               <p className={styles.jobLocation}>{job.location}</p> : null}
-            {job.datePosted ? 
-              <p className={styles.jobDatePosted}>{job.datePosted}</p> : null}
           </div>
           <div onClick={() => setShowMore(!showMore)} className={styles.chevronDiv} >
             <ChevronSVG />
@@ -56,6 +54,12 @@ export const JobItem: React.FC<{
       {showMore && 
         <div className={styles.jobShowMore}>
           <TagDisplay job={job} searchTag={searchTag} />
+          <div className={styles.dates}>
+            {job.datePosted ? 
+              <p className={styles.jobDatePosted}>{`Posted: ${job.datePosted}`}</p> : null}
+            {job.dateClosed ? 
+              <p className={styles.jobDateClosed}>{`Closes: ${job.dateClosed}`}</p> : null}
+          </div>
           {job.description ? 
             <>
               <h1 className={styles.header}>Job Description</h1>
