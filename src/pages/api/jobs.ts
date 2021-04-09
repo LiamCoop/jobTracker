@@ -1,11 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "../../lib/utils/prisma";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     // get all postings
+    const uid = req.query.user_id as string;
     const jobs = await prisma.job.findMany({
-      where: { user_id: req.query.user_id },
+      where: { user_id: uid },
       orderBy: { createdAt: "desc"},
     });
     res.json(req.query.user_id ? jobs : []);
