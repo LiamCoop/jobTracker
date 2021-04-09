@@ -1,3 +1,7 @@
+## JobTrack
+
+This tool allows users access to a central repository where they can store and manage job postings independent of their job application workflow, without fear about the postings being removed, deleted or otherwise unreachable.
+
 ## Tools Used
  - NextJS
  - TypeScript
@@ -5,10 +9,6 @@
  - Postgres
  - Auth0
  - Railway: https://railway.app
-
-# JobTrack
-
-This tool allows users access to a central repository where they can store and manage job postings independent of their job application workflow, without fear about the postings being removed, deleted or otherwise unreachable.
 
 # Job Fields
 
