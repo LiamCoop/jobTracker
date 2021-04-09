@@ -7,6 +7,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     // get all postings
     const jobs = await prisma.job.findMany({
+      where: { user_id: {
+        equals: req.query.uid as string,
+      } },
       orderBy: { createdAt: "desc"},
     });
     res.json(jobs);

@@ -1,17 +1,22 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useSWR, { mutate } from "swr";
 import styles from "../styles/Home.module.css";
 import { useJobs } from '../api2';
 import { AddJobFold } from '../components/AddJob/addJob';
 import { Header } from '../components/Header/header';
+import { JobItem } from '../components/Job/job';
+import { Job } from '../types';
 import { LiveSearch } from '../components/LiveSearch/liveSearch';
 import { useUser } from '@auth0/nextjs-auth0';
 
-const About: NextPage = () => {
-  const { user } = useUser();
 
-  const { data: jobs, error } = useJobs();
+const About: NextPage = () => {
+  // const { user } = useUser();
+  const { user, isLoading } = useUser();
+
+  const { data: jobs, error } = useJobs(user?.sub);
 
   if (error != null) return <div>Error loading jobs...</div>
   if (jobs == null) return <div>Loading...</div>

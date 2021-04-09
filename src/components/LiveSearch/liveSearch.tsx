@@ -10,27 +10,21 @@ export const LiveSearch: React.FC<{ jobs: Job[]}> =
   const [show, setShow] = useState(jobs);
   const [text, setText] = useState('')
   const [tag, setTag] = useState(null);
-  // const [tags, setTags] = useState(jobs.flatMap((job: Job) => job.tags));
 
-  // adjust if a tag is clicked (to show those with that tag)
   const searchTag = (argtag: string) => {
     setTag(tag !== argtag ? argtag : null)
   }
 
-  // if tag, text (search params) change
-  // refine tags first, then refine by text
+  /*
   useEffect(() => {
     let tryshow = jobs;
     if(tag) {
       tryshow = tryshow.filter((job: Job) => 
         job.tags.filter((jobtag) => jobtag === tag).length)
     }
-    if(text) {
-      tryshow = tryshow.filter((job: Job) => Object.values(job).join()
-        .toLowerCase().includes(text.toLowerCase()))
-    }
     setShow(tryshow)
   }, [tag, text, jobs])
+  */
   
   return(
     <div className={styles.liveSearchContainer}>
@@ -56,9 +50,7 @@ export const LiveSearch: React.FC<{ jobs: Job[]}> =
         
       </div>
       <div className={styles.jobContainer}>
-        {show.map((job) => 
-          <JobItem job={job} key={job.id} searchTag={searchTag} />
-        )}
+        {jobs.map((job) => <JobItem job={job} key={job.id} searchTag={searchTag} />)}
       </div>
     </div>
   )
