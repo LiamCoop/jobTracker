@@ -10,13 +10,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Todo {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  text      String
-  completed Boolean
-}
-
 model Job {
   user_id     String
   id          String   @id @default(uuid())
