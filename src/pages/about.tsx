@@ -27,17 +27,30 @@ const About: NextPage = () => {
       
 
       <main className={styles.main}>
-        <Header />
-        {user && <>
+        {user ? 
+        <>
+          <Header />
           <AddJobFold />
           <div className={styles.liveSearchContainer}>
             <LiveSearch jobs={jobs} />
           </div>
-        </>}
+        </> : <Land />}
       </main>
 
     </div>
   );
+}
+
+const Land: React.FC = () => {
+  return (
+    <div>
+      <a href="/api/auth/login">
+        <div className={styles.linkDiv}>
+          <h1 className={styles.login}>Login</h1>
+        </div>
+      </a>
+    </div>
+  )
 }
 
 export default About;
