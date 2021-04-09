@@ -6,12 +6,10 @@ const prisma = new PrismaClient();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     // get all postings
-    const uid = req.query.user_id as string;
     const jobs = await prisma.job.findMany({
-      where: { user_id: uid },
       orderBy: { createdAt: "desc"},
     });
-    res.json(req.query.user_id ? jobs : []);
+    res.json(jobs);
   } else if (req.method === "POST") {
     // create posting
     const data = JSON.parse(req.body);
