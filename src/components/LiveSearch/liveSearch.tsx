@@ -27,32 +27,29 @@ export const LiveSearch: React.FC<{ user: User }> =
     setTag(tag !== argtag ? argtag : null)
   }
 
-  const filterTags = () => {
-    setShow(show.filter((job: Job) => 
-      job.tags.filter((jtag) => jtag === tag).length !== 0
-    ))
-  }
-
-  const filterText = () => {
-    setShow(show.filter((job: Job) => 
-      Object.values(job).join('').toLowerCase()
-      .includes(text.toLowerCase())
-    ))  
+  const filter = () => {
+    if(tag) {
+      setShow(show.filter((job: Job) => 
+        job.tags.filter((jtag) => jtag === tag).length !== 0
+      ))
+    } 
+    if(text) {
+      setShow(show.filter((job: Job) => 
+        Object.values(job).join('').toLowerCase()
+        .includes(text.toLowerCase())
+      ))  
+    }
   }
 
   useEffect(() => {
     setShow(jobs ? jobs : [])
-    if(tag) filterTags()
-    if(text) filterText()
+    filter()
   }, [jobs])
 
   useEffect(() => {
-    if(tag) filterTags()
-  }, [tag])
-
-  useEffect(() => {
-    if(text) filterText()
-  }, [text])
+    if(tag || text) filter()
+    else setShow(jobs ? jobs : [])
+  }, [tag, text])
   
   if (error != null) return <div>Error loading jobs...</div>
   if (jobs == null) return <div>Loading...</div>
