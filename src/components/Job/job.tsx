@@ -110,6 +110,7 @@ const Editable: React.FC<{ item: string, update: (arg: string) => void }> = ({ i
       ) : (
         <div className={styles.editDiv}>
           <input 
+            autoFocus
             className={styles.editInput}
             value={itemVal}
             onChange={e => setItemVal(e.target.value)}
