@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createJob } from '../../api2';
+import { createJob } from '../../api';
 import { useUser } from '@auth0/nextjs-auth0';
 import styles from './AddJob.module.css';
 
