@@ -7,7 +7,8 @@
 
 .addJobIcon {
   box-sizing: border-box;
-  background-color: #F2F2F8;
+  /*background-color: #EDBF85;*/
+  background-color: #F4ECD6;
   padding: 15px;
   margin: 10px;
   border-radius: 10px;
@@ -49,7 +50,7 @@
 .input {
   border: 2px solid #333333;
   border-radius: 8px;
-  background-color: #F2F2F8;
+  background-color: #F4ECD6;
   height: 28px;
   text-align: center;
 }
@@ -86,11 +87,13 @@
   max-width: 150px;
   margin: 5px 0;
   background-color: #333333;
+  border: 1px solid #F4ECD6;
+  color: #F4ECD6;
   border-radius: 12px;
 }
 
 .addJobButtonText {
-  color: #F2F2F8;
+  color: #F4ECD6;
   font-size: 16px;
   margin: 4px;
 }
@@ -110,6 +113,7 @@
   height: 25px;
   width: 25px;
   border: 2px solid #333333;
+  background-color: #F4ECD6;
   border-radius: 50%;
   margin: 2px;
   -moz-user-select: none;

@@ -5,8 +5,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #F2F2F8;
   border-bottom: 2px solid #333333;
+  background-color: #F4ECD6;
 }
 
 .linkContainer {
@@ -34,7 +34,6 @@
   grid-template-rows: 1fr 1fr;
   justify-content: center;
   align-items: center;
-  background-color: #F2F2F8;
 }
 
 .userName {

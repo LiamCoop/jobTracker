@@ -1,8 +1,8 @@
 .jobContainer {
   width: 100%;
   align-self: center;
-  background-color: #F2F2F8;
-  border: 2px solid #141414;
+  background-color: #F4ECD6;
+  border: 2px solid #333333;
   border-radius: 8px;
 }
 
@@ -30,8 +30,8 @@
   align-items: center;
   height: 30px;
   width: 30px;
-  background-color: #F2F2F8;
-  border: 2px solid #141414;
+  background-color: #ebe9e2;
+  border: 2px solid #333333;
   border-radius: 50%;
   margin: 2px;
 }
@@ -46,7 +46,7 @@
 }
 
 .applCheck {
-  color: rgb(5, 197, 5);
+  color: #337C2C;
   font-size: 28px;
 }
 
@@ -124,7 +124,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F2F2F8;
+  background-color: #ebe9e2;
   height: 30px;
   width: 30px;
   border: 2px solid #333333;
@@ -188,10 +188,11 @@
 }
 
 .tag {
+  background-color: #C9C49C;
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  background-color: #F2F2F8;
+  /*background-color: #F2F2F8;*/
   border: 1px solid #333333;
   padding: 5px 15px;
   margin: 0px;

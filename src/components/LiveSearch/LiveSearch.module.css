@@ -32,7 +32,8 @@
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #333333;
-  background-color: #F2F2F8;
+  /*background-color: #F2F2F8;*/
+  background-color: #F4ECD6;
   opacity: 1;
 }
 
@@ -58,7 +59,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  background-color: #F2F2F8;
+  background-color: #C9C49C;
   border: 1px solid #333333;
   padding: 5px 15px;
   margin: 0px;
@@ -86,7 +87,7 @@
   align-items: center;
   border: 1px solid #333333;
   background: #333333;
-  color: #F2F2F8;
+  color: #F4ECD6;
   border-radius: 0 5px 5px 0;
 }
 

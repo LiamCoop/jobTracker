@@ -28,6 +28,7 @@ export const LiveSearch: React.FC<{ user: User }> =
   }
 
   const filter = () => {
+    console.log('filter ran');
     if(tag) {
       setShow(show.filter((job: Job) => 
         job.tags.filter((jtag) => jtag === tag).length !== 0
@@ -42,11 +43,13 @@ export const LiveSearch: React.FC<{ user: User }> =
   }
 
   useEffect(() => {
-    setShow(jobs ? jobs : [])
+    console.log('jobs useEffect sent')
+    setShow(jobs)
     filter()
   }, [jobs])
 
   useEffect(() => {
+    console.log('filter useEffect sent')
     if(tag || text) filter()
     else setShow(jobs ? jobs : [])
   }, [tag, text])
