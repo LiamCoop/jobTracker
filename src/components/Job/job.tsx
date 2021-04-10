@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from './Job.module.css';
 import { updateJob, deleteJob } from '../../api';
 import { Job } from '../../types';
-import { DeleteSVG, ChevronSVG } from '../svgs/svgs';
 
 export const JobItem: React.FC<{ 
   job: Job, 
