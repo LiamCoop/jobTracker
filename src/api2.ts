@@ -6,7 +6,7 @@ const jobPath = "/api/jobs";
 
 const fetchWithUser = (sub) => (url) => fetch(`${url}?uid=${sub}`).then(r=>r.json())
 
-export const useJobs = (sub) => useSWR<Job[]>(jobPath, fetchWithUser(sub))
+export const useJobs = (sub = '') => useSWR<Job[]>(jobPath, fetchWithUser(sub))
 
 export const createJob = async ( 
   user_id: string,
