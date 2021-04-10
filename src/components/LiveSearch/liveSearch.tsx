@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import styles from './LiveSearch.module.css';
 import { useJobs } from '../../api';
 import { JobItem } from '../Job/job';
@@ -17,9 +17,9 @@ interface User {
 export const LiveSearch: React.FC<{ user: User }> = 
 ({ user }) => {
 
-  const { data: jobs, error } = useJobs(user?.sub);
+  const { data: jobs, error } = useJobs(user.sub);
 
-  const [show, setShow] = useState([]);
+  const [show, setShow] = useState([])
   const [text, setText] = useState('')
   const [tag, setTag] = useState(null);
 
@@ -28,31 +28,26 @@ export const LiveSearch: React.FC<{ user: User }> =
   }
 
   const filter = () => {
-    console.log('filter ran');
+    let tryshow = jobs;
     if(tag) {
-      setShow(show.filter((job: Job) => 
-        job.tags.filter((jtag) => jtag === tag).length !== 0
-      ))
-    } 
-    if(text) {
-      setShow(show.filter((job: Job) => 
-        Object.values(job).join('').toLowerCase()
-        .includes(text.toLowerCase())
-      ))  
+      tryshow = tryshow.filter((job: Job) => 
+        job.tags.filter((jtag: string) => 
+          jtag === tag
+        ).length !== 0
+      )
     }
+    if(text) {
+      tryshow = tryshow.filter((job: Job) => 
+        Object.values(job).join('').toLowerCase()
+          .includes(text.toLowerCase())
+      )
+    }
+    setShow(tryshow)
   }
 
   useEffect(() => {
-    console.log('jobs useEffect sent')
-    setShow(jobs)
     filter()
-  }, [jobs])
-
-  useEffect(() => {
-    console.log('filter useEffect sent')
-    if(tag || text) filter()
-    else setShow(jobs ? jobs : [])
-  }, [tag, text])
+  }, [jobs, tag, text])
   
   if (error != null) return <div>Error loading jobs...</div>
   if (jobs == null) return <div>Loading...</div>
