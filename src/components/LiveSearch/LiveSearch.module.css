@@ -49,12 +49,6 @@
   color: #333333;
 }
 
-.searchTerm:-ms-input-placeholder {
-  opacity: 0.8;
-  text-align: start; 
-  color: #333333;
-}
-
 .tag {
   cursor: pointer;
   display: flex;

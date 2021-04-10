@@ -35,16 +35,12 @@
    text-align: center;
 }
 
-.input:-moz-placeholder { /* Firefox 18- */
+.input:-moz-placeholder {
    text-align: center;  
 }
 
-.input::-moz-placeholder {  /* Firefox 19+ */
+.input::-moz-placeholder {
    text-align: center;  
-}
-
-.input:-ms-input-placeholder {  
-   text-align: center; 
 }
 
 .input {
@@ -110,10 +106,10 @@
   cursor: pointer;
   justify-content: center;
   align-items: center;
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   border: 2px solid #333333;
-  background-color: #F4ECD6;
+  background-color: #ebe9e2;
   border-radius: 50%;
   margin: 2px;
   -moz-user-select: none;

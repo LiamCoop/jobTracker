@@ -28,7 +28,7 @@ export const LiveSearch: React.FC<{ user: User }> =
   }
 
   const filter = () => {
-    let tryshow = jobs;
+    let tryshow = jobs ? jobs : [];
     if(tag) {
       tryshow = tryshow.filter((job: Job) => 
         job.tags.filter((jtag: string) => 
