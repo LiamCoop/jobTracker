@@ -14,8 +14,6 @@ const Home: NextPage = () => {
   // without hook, hook is async; takes too long
   const { user, isLoading } = useUser();
 
-  if (isLoading) return <div>Loading...</div>
-
   return (
     <div>
       <Head>
@@ -26,14 +24,18 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {user ? 
-            <>
-              <Header />
-              <AddJobFold />
-              <div className={styles.liveSearchContainer}>
-                <LiveSearch user={user} />
-              </div>
-            </> : <Land />
+        {isLoading ? <div>Loading...</div> :
+          <>
+            {user ? 
+              <>
+                <Header />
+                <AddJobFold />
+                <div className={styles.liveSearchContainer}>
+                  <LiveSearch user={user} />
+                </div>
+              </> : <Land />
+            }
+          </>
         }
       </main>
 
