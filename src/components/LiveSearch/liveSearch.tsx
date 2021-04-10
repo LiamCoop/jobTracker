@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './LiveSearch.module.css';
 import { useJobs } from '../../api';
 import { JobItem } from '../Job/job';
