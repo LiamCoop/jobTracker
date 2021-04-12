@@ -5,7 +5,7 @@ import { Job } from '../../types';
 
 export const JobItem: React.FC<{ 
   job: Job, 
-  searchTag: (tag: string) => void 
+  searchTag: (tag: string) => void, 
 }> = ({ job, searchTag }) => {
   const [showMore, setShowMore] = useState(false);
 
@@ -59,9 +59,25 @@ export const JobItem: React.FC<{
           <TagDisplay job={job} searchTag={searchTag} />
           <div className={styles.dates}>
             {!!job.datePosted ? 
-              <p className={styles.jobDatePosted}>{`Posted: ${job.datePosted}`}</p> : null}
+              <div className={styles.date}>
+                <p>Posted:</p>
+                <Editable 
+                  item={job.datePosted} 
+                  update={(arg: string) => {
+                    updateJob({ ...job, datePosted: arg })
+                  }} 
+                />
+              </div> : null}
             {!!job.dateClosed ? 
-              <p className={styles.jobDateClosed}>{`Closes: ${job.dateClosed}`}</p> : null}
+              <div className={styles.date}>
+                <p>Closes:</p>
+                <Editable 
+                  item={job.dateClosed} 
+                  update={(arg: string) => {
+                    updateJob({ ...job, dateClosed: arg })
+                  }} 
+                />
+              </div> : null}
           </div>
           {!!job.description ? 
             <>
@@ -73,14 +89,14 @@ export const JobItem: React.FC<{
           {!!job.notes ? 
             <>
               <h1 className={styles.header}>Notes</h1>
-              <Editable textArea={false} item={job.notes} update={(arg: string) => {
+              <Editable item={job.notes} update={(arg: string) => {
                 updateJob({ ...job, notes: arg }) }} 
               />
             </> : null}
           {!!job.contact ? 
             <>
               <h1 className={styles.header}>Contact</h1>
-              <Editable textArea={false} item={job.contact} update={(arg: string) => {
+              <Editable item={job.contact} update={(arg: string) => {
                 updateJob({ ...job, contact: arg })}} 
               />
             </> : null}
@@ -105,24 +121,39 @@ const AddMissing: React.FC<{ job: Job }> = ({ job }) => {
   const handleSubmit = () => {
     if(!val) return
     switch(option) {
+      case 'description':
+        updateJob({ ...job, description: val })
+        reset()
+        break;
       case 'datePosted':
         updateJob({ ...job, datePosted: val })
+        reset()
         break;
       case 'dateClosed':
         updateJob({ ...job, dateClosed: val })
+        reset()
         break;
       case 'contact':
         updateJob({ ...job, contact: val })
+        reset()
         break;
       case 'notes':
         updateJob({ ...job, notes: val })
+        reset()
         break;
       case 'link':
         updateJob({ ...job, link: val })
+        reset()
         break;
       default:
         break;
     }
+  }
+
+  const reset = () => {
+    setOption('')
+    setVal('')
+    setAdding(!adding)
   }
 
   return (
@@ -133,36 +164,65 @@ const AddMissing: React.FC<{ job: Job }> = ({ job }) => {
           onSubmit={e => {
             e.preventDefault()
             handleSubmit()
-            setOption('')
-            setAdding(!adding)
-            setVal('')
           }}
         >
-          <div className={styles.circle} onClick={() => setAdding(!adding)}>
+          <div className={styles.addFieldCircle} onClick={() => reset()}>
             <p>x</p>
           </div>
-          <div className={styles.selector}>
-            <label>Add Missing Field</label>
-            <select autoFocus onChange={e => setOption(e.target.value)}>
-              <option value="">Missing Field</option>
+          <div className={styles.selectorDiv}>
+            <select autoFocus 
+              className={styles.selector}
+              onChange={e => setOption(e.target.value)}
+            >
+              <option className={styles.AddMissingOption} value="">
+                Missing Field
+              </option>
+              {!job.description && 
+                <option className={styles.AddMissingOption} value="description">
+                  Description
+                </option>}
               {!job.datePosted && 
-                <option value="datePosted">Date Posted</option>}
+                <option className={styles.AddMissingOption} value="datePosted">
+                  Date Posted
+                </option>}
               {!job.dateClosed && 
-                <option value="dateClosed">Date Closed</option>}
+                <option className={styles.AddMissingOption} value="dateClosed">
+                  Date Closed
+                </option>}
               {!job.contact && 
-                <option value="contact">contact</option>}
+                <option className={styles.AddMissingOption} value="contact">
+                  contact
+                </option>}
               {!job.notes && 
-                <option value="notes">notes</option>}
+                <option className={styles.AddMissingOption} value="notes">
+                  notes
+                </option>}
               {!job.link && 
-                <option value="link">link</option>}
+                <option className={styles.AddMissingOption} value="link">
+                  link
+                </option>}
             </select>
           </div>
-          <textarea 
-            ref={inputRef}
-            value={val} 
-            onChange={e => setVal(e.target.value)}
-          />
-          <input type="submit" value="Submit" />
+          {option === 'description' ? (
+            <textarea 
+              className={styles.editTextInput}
+              ref={inputRef}
+              value={val} 
+              onChange={e => setVal(e.target.value)}
+            />
+          ) : (
+            <input
+              className={styles.editInput}
+              ref={inputRef}
+              value={val}
+              onChange={e => setVal(e.target.value)}
+            />
+          )}
+          <button
+            className={styles.addMissingButton} 
+            type="submit" 
+            value="submit"
+          >Add</button> 
         </form>
       ) : (
         <div className={styles.circle} onClick={() => setAdding(!adding)}>
@@ -173,15 +233,19 @@ const AddMissing: React.FC<{ job: Job }> = ({ job }) => {
   )
 }
 
-const Editable: React.FC<{ textArea: boolean, item: string, update: (arg: string) => void }> = 
-({ textArea = false, item, update }) => {
+const Editable: React.FC<{ 
+  textArea?: boolean, 
+  item: string, 
+  update: (arg: string) => void,
+}> = ({ textArea = false, item, update }) => {
   const [editing, setEditing] = useState(false);
   const [itemVal, setItemVal] = useState(item);
+
   return (
     <>
       {!editing ? (
         <div
-          onDoubleClick={() => setEditing(true)} 
+          onDoubleClick={() => setEditing(!editing)} 
           className={styles.jobNotes}
         >
           {itemVal}
@@ -206,12 +270,13 @@ const Editable: React.FC<{ textArea: boolean, item: string, update: (arg: string
           <button 
             className={styles.editSave}
             onClick={() => {
-              setEditing(false)
+              setEditing(!editing)
               update(itemVal)
             }}
           >
-            <svg height="20px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            <svg height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+              <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
           </button>
         </div>  

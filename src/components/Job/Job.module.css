@@ -17,10 +17,20 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin: 10px;
 }
 
-.dates > * {
-  color: #333333;
+
+.date {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.date > * {
+  margin: 0;
+  padding: 0;
 }
 
 .circle {
@@ -34,6 +44,10 @@
   border: 2px solid #333333;
   border-radius: 50%;
   margin: 2px;
+}
+
+.circle:hover {
+  background-color: #C9C49C;
 }
 
 .applied {
@@ -133,6 +147,10 @@
   cursor: pointer;
 }
 
+.circleDelete:hover {
+  background-color: #C9C49C;
+}
+
 .chevronDiv {
   cursor: pointer;
   display: flex;  
@@ -212,7 +230,11 @@
 
 .editSave {
   border: 2px solid #333333;
+  background-color: #F4ECD6;
   border-radius: 10px;
+}
+.editSave:hover {
+  background-color: #C9C49C;
 }
 
 .editSaveText {
@@ -268,6 +290,7 @@
 
 .addTagInput {
   cursor: text;
+  min-width: 50px;
   width: 5vw;
   background-color: #F4ECD6;
   border: none;
@@ -302,17 +325,70 @@
   margin: 10px;
 }
 
-.addFieldForm {
-  margin: 5px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
+.AddMissingOption {
+  background-color: #F4ECD6;
 }
 
-.selector {
+.addFieldForm {
+  align-self: center;
+  width: 80%;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-self: center;
+}
+
+.selectorDiv {
+  background-color: #F4ECD6;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.selector {
+  margin: 0 5px;
+  align-self: flex-start;
+  background-color: #F4ECD6;
+  border: 2px solid #333333;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+
+.addMissingInput {
+  background-color: #F4ECD6;
+}
+
+.addMissingTextArea {
+  background-color: #F4ECD6;
+  resize: vertical;
+}
+
+.addMissingInput:focus {
+  outline-width: 0;
+}
+
+.addMissingButton {
+  width: 20%;
+  background-color: #333333;
+  color: #F4ECD6;
+  border-radius: 8px;
+}
+
+.addFieldCircle {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
   align-items: center;
+  height: 30px;
+  width: 30px;
+  background-color: #ebe9e2;
+  border: 2px solid #333333;
+  border-radius: 50%;
+  margin: 2px;
+  align-self: flex-end;
+}
+
+.addFieldCircle:hover {
+  background-color: #C9C49C;
 }
