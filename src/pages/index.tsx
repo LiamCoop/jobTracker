@@ -18,9 +18,9 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>About</title>
-        <meta key="cacheControl" http-equiv='cache-control' content='no-cache' />
-        <meta key="httpEquiv" http-equiv='expires' content='0' />
-        <meta key="httpEquiv2" http-equiv='pragma' content='no-cache' />
+        <meta key="cacheControl" httpEquiv='cache-control' content='no-cache' />
+        <meta key="httpEquiv" httpEquiv='expires' content='0' />
+        <meta key="httpEquiv2" httpEquiv='pragma' content='no-cache' />
       </Head>
 
       <main className={styles.main}>
