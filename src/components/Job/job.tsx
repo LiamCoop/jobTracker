@@ -8,7 +8,6 @@ export const JobItem: React.FC<{
   searchTag: (tag: string) => void 
 }> = ({ job, searchTag }) => {
   const [showMore, setShowMore] = useState(false);
-  console.log(job);
 
   return (
     <div className={styles.jobContainer}>
