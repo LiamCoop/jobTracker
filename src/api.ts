@@ -23,22 +23,23 @@ export const createJob = async (
 ) => {
   mutate(
     jobPath,
-    jobs => 
-    [{ 
-        user_id,
-        id: "new-job", 
-        title, 
-        description, 
-        company, 
-        applied, 
-        notes, 
-        contact,
-        datePosted,
-        dateClosed,
-        location,
-        link,
-        tags,
-    }, ...jobs],
+    jobs => [{ 
+      user_id,
+      id: "new-job", 
+      title, 
+      description, 
+      company, 
+      applied, 
+      notes, 
+      contact,
+      datePosted,
+      dateClosed,
+      location,
+      link,
+      tags,
+    }, 
+    ...jobs
+  ],
     false,
   );
   await fetch(jobPath, {
