@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from './Job.module.css';
 import { updateJob, deleteJob } from '../../api';
 import { Job } from '../../types';
@@ -28,9 +28,9 @@ export const JobItem: React.FC<{
         <p className={styles.jobTitle}>{job.title}</p>
         <div className={styles.jobBottom}>
           <div className={styles.jobFlexbox}>
-            {job.company ? 
+            {!!job.company ? 
               <p className={styles.jobCompany}>{job.company}</p> : null}
-            {job.location ? 
+            {!!job.location ? 
               <p className={styles.jobLocation}>{job.location}</p> : null}
           </div>
           <div onClick={() => setShowMore(!showMore)} className={styles.chevronDiv} >
@@ -47,7 +47,7 @@ export const JobItem: React.FC<{
           </div>
         </div>
         <div className={styles.jobLinkDiv}>
-          {job.link ? <a 
+          {!!job.link ? <a 
             className={styles.jobLink} 
             href={job.link} 
             target="_blank"
@@ -58,36 +58,119 @@ export const JobItem: React.FC<{
         <div className={styles.jobShowMore}>
           <TagDisplay job={job} searchTag={searchTag} />
           <div className={styles.dates}>
-            {job.datePosted ? 
+            {!!job.datePosted ? 
               <p className={styles.jobDatePosted}>{`Posted: ${job.datePosted}`}</p> : null}
-            {job.dateClosed ? 
+            {!!job.dateClosed ? 
               <p className={styles.jobDateClosed}>{`Closes: ${job.dateClosed}`}</p> : null}
           </div>
-          {job.description ? 
+          {!!job.description ? 
             <>
               <h1 className={styles.header}>Job Description</h1>
               <Editable textArea item={job.description} update={(arg: string) => {
                 updateJob({ ...job, description: arg })
               }} />
             </> : null}
-          {job.notes ? 
+          {!!job.notes ? 
             <>
               <h1 className={styles.header}>Notes</h1>
               <Editable textArea={false} item={job.notes} update={(arg: string) => {
                 updateJob({ ...job, notes: arg }) }} 
               />
             </> : null}
-          {job.contact ? 
+          {!!job.contact ? 
             <>
               <h1 className={styles.header}>Contact</h1>
               <Editable textArea={false} item={job.contact} update={(arg: string) => {
                 updateJob({ ...job, contact: arg })}} 
               />
             </> : null}
+          <AddMissing job={job} />
         </div>
       }
     </div>
   );
+}
+
+const AddMissing: React.FC<{ job: Job }> = ({ job }) => {
+  const [adding, setAdding] = useState(false);
+  const [option, setOption] = useState('')
+  const [val, setVal] = useState(null);
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if(option) inputRef?.current?.focus();
+  }, [option])
+
+  const handleSubmit = () => {
+    if(!val) return
+    switch(option) {
+      case 'datePosted':
+        updateJob({ ...job, datePosted: val })
+        break;
+      case 'dateClosed':
+        updateJob({ ...job, dateClosed: val })
+        break;
+      case 'contact':
+        updateJob({ ...job, contact: val })
+        break;
+      case 'notes':
+        updateJob({ ...job, notes: val })
+        break;
+      case 'link':
+        updateJob({ ...job, link: val })
+        break;
+      default:
+        break;
+    }
+  }
+
+  return (
+    <div className={styles.AddMissingContainer}>
+      {adding ? (
+        <form 
+          className={styles.addFieldForm}
+          onSubmit={e => {
+            e.preventDefault()
+            handleSubmit()
+            setOption('')
+            setAdding(!adding)
+            setVal('')
+          }}
+        >
+          <div className={styles.circle} onClick={() => setAdding(!adding)}>
+            <p>x</p>
+          </div>
+          <div className={styles.selector}>
+            <label>Add Missing Field</label>
+            <select autoFocus onChange={e => setOption(e.target.value)}>
+              <option value="">Missing Field</option>
+              {!job.datePosted && 
+                <option value="datePosted">Date Posted</option>}
+              {!job.dateClosed && 
+                <option value="dateClosed">Date Closed</option>}
+              {!job.contact && 
+                <option value="contact">contact</option>}
+              {!job.notes && 
+                <option value="notes">notes</option>}
+              {!job.link && 
+                <option value="link">link</option>}
+            </select>
+          </div>
+          <textarea 
+            ref={inputRef}
+            value={val} 
+            onChange={e => setVal(e.target.value)}
+          />
+          <input type="submit" value="Submit" />
+        </form>
+      ) : (
+        <div className={styles.circle} onClick={() => setAdding(!adding)}>
+          <p>+</p>
+        </div>
+      )}
+    </div>
+  )
 }
 
 const Editable: React.FC<{ textArea: boolean, item: string, update: (arg: string) => void }> = 
