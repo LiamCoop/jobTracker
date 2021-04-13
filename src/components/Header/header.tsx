@@ -12,7 +12,7 @@ export const Header = () => {
     <div className={styles.headerContainer}>
       <div className={styles.linkContainer}>
         {user ? (
-          <a href="/api/auth/logout?returnTo=http%3A@2F@2Flocalhost:3000">
+          <a href="/api/auth/logout">
             <div className={styles.logDiv}>
               <p className={styles.login}>Logout</p>
             </div>

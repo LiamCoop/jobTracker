@@ -2,17 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from './LiveSearch.module.css';
 import { useJobs } from '../../api';
 import { JobItem } from '../Job/job';
-import { Job } from '../../types';
-
-interface User { 
-  nickname?: string,
-  name?: string,
-  picture?: string,
-  updated_at?: string,
-  email?: string,
-  email_verified?: boolean,
-  sub?: string,
-}
+import { Job, User } from '../../types';
 
 export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
   const { data: jobs, error } = useJobs(user?.sub);
@@ -39,8 +29,10 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
     setShow(tryshow)
   }, [jobs, tag, text])
   
-  if (error != null) return <div>Error loading jobs...</div>
-  if (jobs == null) return <div>Loading...</div>
+  if (error != null) 
+    return <div className={styles.noJob}>Error loading jobs...</div>
+  if (jobs == null) 
+    return <div className={styles.noJob}>Loading...</div>
 
   return(
     <>

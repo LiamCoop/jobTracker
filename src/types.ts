@@ -21,8 +21,14 @@ export interface Job {
   link?: string;
   tags?: string[];
 }
-// date posted?
-// date closing?
-// location
-// tags
-// link
+
+export interface User { 
+  nickname?: string,
+  name?: string,
+  picture?: string,
+  updated_at?: string,
+  email?: string,
+  email_verified?: boolean,
+  sub?: string,
+}
+
