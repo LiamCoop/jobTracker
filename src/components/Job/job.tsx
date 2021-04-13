@@ -168,7 +168,7 @@ const TagDisplay: React.FC<{
       {hover && 
         <div className={styles.tag}
           onClick={() => setShowInput(true)}
-          style={showInput && {cursor: 'default'}}
+          style={showInput ? {cursor: 'default'} : {}}
         >
           {showInput ? 
             <input className={styles.addTagInput}
