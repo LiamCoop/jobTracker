@@ -116,8 +116,8 @@ export const JobItem: React.FC<{
               />
             </>}
           {(!job.datePosted || !job.dateClosed || !job.description || 
-            !job.notes || !job.contact || !job.link) && 
-              <AddMissing job={job} />}
+            !job.location || !job.notes || !job.contact || !job.link) 
+            && <AddMissing job={job} />}
         </div>
       }
     </div>
@@ -129,6 +129,7 @@ const TagDisplay: React.FC<{
   updateTags: (tags: string[]) => void,
   searchTag: (tag: string) => void 
 }> = ({ tags, updateTags, searchTag }) => {
+
   const [hover, setHover] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [text, setText] = useState('');
@@ -167,12 +168,11 @@ const TagDisplay: React.FC<{
       {hover && 
         <div className={styles.tag}
           onClick={() => setShowInput(true)}
-          style={showInput ? {cursor: 'default'}: {}}
+          style={showInput && {cursor: 'default'}}
         >
           {showInput ? 
-            <input 
+            <input className={styles.addTagInput}
               autoFocus
-              className={styles.addTagInput}
               value={text}
               placeholder="tag"
               onChange={e => setText(e.target.value)}
