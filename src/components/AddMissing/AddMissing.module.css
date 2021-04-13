@@ -94,7 +94,7 @@
 
 .editTextInput {
   resize: vertical;
-  height: 100px;
+  min-height: 100px;
   width: 100%;
   border: 2px solid #333333;
   border-radius: 8px;

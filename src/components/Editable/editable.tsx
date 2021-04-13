@@ -20,6 +20,9 @@ export const Editable: React.FC<{
         </div>
       ) : (
         <div className={styles.editDiv}>
+          <div className={styles.circle} onClick={() => update('')} >
+            <p className={styles.removeText}>x</p>
+          </div>
           {textArea ? (
             <textarea 
               className={styles.editTextInput}

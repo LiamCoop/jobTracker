@@ -18,7 +18,7 @@
 
 .editTextInput {
   resize: vertical;
-  height: 100px;
+  min-height: 100px;
   width: 100%;
   border: 2px solid #333333;
   border-radius: 8px;
@@ -42,7 +42,12 @@
   background-color: #F4ECD6;
   border-radius: 10px;
 }
+
 .editSave:hover {
   background-color: #C9C49C;
 }
 
+.removeText {
+  color: red;
+  font-size: 16px;
+}
