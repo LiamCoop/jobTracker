@@ -1,4 +1,6 @@
 Currently live! Check it out: https://jobTracker-development.up.railway.app/
+Sign up to start managing your job postings.
+
 ## JobTracker
 
 This tool seeks to provide access to a central repository where users can store and manage job postings independent of their job application workflow, without fear about the postings being removed, deleted or becoming otherwise unreachable.
