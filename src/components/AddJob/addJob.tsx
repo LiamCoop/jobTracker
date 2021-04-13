@@ -94,14 +94,14 @@ const AddJobItem: React.FC<{ user, closeFold: () => void}> = ({ user, closeFold 
       <input 
         required
         className={`${styles.input} ${styles.inputTitle}`}
-        placeholder="Job Title (required)"
+        placeholder="Job Title"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <input 
         required
         className={`${styles.input} ${styles.inputCompany}`}
-        placeholder="Company (required)"
+        placeholder="Company"
         value={company}
         onChange={e => setCompany(e.target.value)}
       />
@@ -144,7 +144,7 @@ const AddJobItem: React.FC<{ user, closeFold: () => void}> = ({ user, closeFold 
       <textarea 
         required
         className={`${styles.input} ${styles.inputDescription}`}
-        placeholder="Description (required)"
+        placeholder="Description"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />

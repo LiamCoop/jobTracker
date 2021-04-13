@@ -10,6 +10,7 @@ export const JobItem: React.FC<{
   searchTag: (tag: string) => void, 
 }> = ({ job, searchTag }) => {
   const [showMore, setShowMore] = useState(false);
+  const updateTags = (utags: string[]) => updateJob({ ...job, tags: utags })
 
   return (
     <div className={styles.jobContainer}>
@@ -20,7 +21,7 @@ export const JobItem: React.FC<{
             onDoubleClick={() => updateJob({ ...job, applied: !job.applied }) }
           >
             <p className={`${styles.applied} ${job.applied ? styles.applCheck : styles.applX}`}>
-              {job.applied ? '✔' : '✕'}
+              {!!job.applied ? '✔' : '✕'}
             </p>
           </div>
           <p className={styles.jobAppliedText}>
@@ -30,10 +31,10 @@ export const JobItem: React.FC<{
         <p className={styles.jobTitle}>{job.title}</p>
         <div className={styles.jobBottom}>
           <div className={styles.jobFlexbox}>
-            {!!job.company ? 
-              <p className={styles.jobCompany}>{job.company}</p> : null}
-            {!!job.location ? 
-              <p className={styles.jobLocation}>{job.location}</p> : null}
+            {!!job.company &&
+              <p className={styles.jobCompany}>{job.company}</p>}
+            {!!job.location &&
+              <p className={styles.jobLocation}>{job.location}</p>}
           </div>
           <div onClick={() => setShowMore(!showMore)} className={styles.chevronDiv} >
             <svg height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#333333" >
@@ -49,61 +50,74 @@ export const JobItem: React.FC<{
           </div>
         </div>
         <div className={styles.jobLinkDiv}>
-          {!!job.link ? <a 
-            className={styles.jobLink} 
-            href={job.link} 
-            target="_blank"
-          >🔗</a> : null}
+          {!!job.link && 
+            <a 
+              className={styles.jobLink} 
+              href={job.link} 
+              target="_blank"
+            >🔗</a> 
+          }
         </div>
       </div>
       {showMore && 
         <div className={styles.jobShowMore}>
-          <TagDisplay job={job} searchTag={searchTag} />
+          <TagDisplay tags={job.tags} updateTags={updateTags} searchTag={searchTag} />
           <div className={styles.dates}>
-            {!!job.datePosted ? 
+            {!!job.datePosted &&
               <div className={styles.date}>
-                <p>Posted:</p>
+                <p>Posted: </p>
                 <Editable 
                   item={job.datePosted} 
                   update={(arg: string) => {
                     updateJob({ ...job, datePosted: arg })
                   }} 
                 />
-              </div> : null}
-            {!!job.dateClosed ? 
+              </div>}
+            {!!job.dateClosed && 
               <div className={styles.date}>
-                <p>Closes:</p>
+                <p>Closes: </p>
                 <Editable 
                   item={job.dateClosed} 
                   update={(arg: string) => {
                     updateJob({ ...job, dateClosed: arg })
                   }} 
                 />
-              </div> : null}
+              </div>}
           </div>
-          {!!job.description ? 
+          {!!job.description &&
             <>
               <h1 className={styles.header}>Job Description</h1>
-              <Editable textArea item={job.description} update={(arg: string) => {
-                updateJob({ ...job, description: arg })
-              }} />
-            </> : null}
-          {!!job.notes ? 
+              <Editable 
+                textArea 
+                item={job.description} 
+                update={(arg: string) => {
+                  updateJob({ ...job, description: arg })
+                }} 
+              />
+            </>}
+          {!!job.notes &&
             <>
               <h1 className={styles.header}>Notes</h1>
-              <Editable item={job.notes} update={(arg: string) => {
-                updateJob({ ...job, notes: arg }) }} 
+              <Editable 
+                item={job.notes} 
+                update={(arg: string) => {
+                  updateJob({ ...job, notes: arg }) 
+                }} 
               />
-            </> : null}
-          {!!job.contact ? 
+            </>}
+          {!!job.contact &&
             <>
               <h1 className={styles.header}>Contact</h1>
-              <Editable item={job.contact} update={(arg: string) => {
-                updateJob({ ...job, contact: arg })}} 
+              <Editable 
+                item={job.contact} 
+                update={(arg: string) => {
+                  updateJob({ ...job, contact: arg })
+                }} 
               />
-            </> : null}
+            </>}
           {(!job.datePosted || !job.dateClosed || !job.description || 
-            !job.notes || !job.contact || !job.link) && <AddMissing job={job} />}
+            !job.notes || !job.contact || !job.link) && 
+              <AddMissing job={job} />}
         </div>
       }
     </div>
@@ -111,26 +125,24 @@ export const JobItem: React.FC<{
 }
 
 const TagDisplay: React.FC<{ 
-  job: Job,
+  tags: string[],
+  updateTags: (tags: string[]) => void,
   searchTag: (tag: string) => void 
-}> = ({ job, searchTag }) => {
+}> = ({ tags, updateTags, searchTag }) => {
   const [hover, setHover] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [text, setText] = useState('');
 
   const handleKeyDown = (e) => {
     if(e.key === 'Enter'){
-      updateJob(
-        { ...job, tags: Array.from(new Set ([...job.tags, text]))}
-      )
+      updateTags(Array.from(new Set ([...tags, text])))
       setText('')
       setShowInput(false)
     }
   }
 
   return (
-    <div 
-      className={styles.tagsDiv}
+    <div className={styles.tagsDiv}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
         setHover(false)
@@ -138,28 +150,23 @@ const TagDisplay: React.FC<{
         setText('')
       }}
     >
-      {job.tags.map((tag, idx) => 
-        <div 
-          className={styles.tag} 
+      {tags.map((tag, idx) => 
+        <div className={styles.tag} 
           onClick={() => searchTag(tag)}
           key={tag} 
         >
-          <p 
-            className={styles.tagRemove}
+          <p className={styles.tagRemove}
             onClick={(e) => {
               e.stopPropagation()
-              updateJob({ ...job, tags: 
-                job.tags.filter((t, iidx) => idx !== iidx )
-              })
+              updateTags(tags.filter((t, iidx) => idx !== iidx))
             }}
           >x</p>
           <p className={styles.tagText}>{tag}</p>
         </div>
       )}
       {hover && 
-        <div 
+        <div className={styles.tag}
           onClick={() => setShowInput(true)}
-          className={styles.tag}
           style={showInput ? {cursor: 'default'}: {}}
         >
           {showInput ? 
@@ -168,10 +175,9 @@ const TagDisplay: React.FC<{
               className={styles.addTagInput}
               value={text}
               placeholder="tag"
-              onChange={(e) => setText(e.target.value)}
+              onChange={e => setText(e.target.value)}
               onKeyDown={handleKeyDown}
-            /> : <p className={styles.addTagText}>+</p>
-          }
+            /> : <p className={styles.addTagText}>+</p>}
         </div >
       }
     </div>
