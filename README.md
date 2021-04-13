@@ -4,9 +4,11 @@ This tool seeks to provide access to a central repository where users can store 
 Use tags and the search functionality to filter your job postings.
 Edit fields to update with contact information, or additional notes at a later time.
 
-file:///home/lco/Screenshot%20from%202021-04-12%2020-06-13.png![image](https://user-images.githubusercontent.com/22286436/114491861-3b922800-9bcc-11eb-88c0-98ffdce64cf8.png)
+![Screenshot from 2021-04-12 20-06-13](https://user-images.githubusercontent.com/22286436/114491923-58c6f680-9bcc-11eb-996b-f99cb70e4747.png)
 
-file:///home/lco/Screenshot%20from%202021-04-12%2020-06-43.png![image](https://user-images.githubusercontent.com/22286436/114491877-4056dc00-9bcc-11eb-85e6-1990194be598.png)
+![Screenshot from 2021-04-12 20-06-43](https://user-images.githubusercontent.com/22286436/114491900-4f3d8e80-9bcc-11eb-8b77-9e271f1d7270.png)
+
+
 
 ## Tools Used
  - NextJS: https://nextjs.org/
