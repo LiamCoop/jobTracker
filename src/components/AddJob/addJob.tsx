@@ -19,7 +19,7 @@ export const AddJobFold = () => {
         </div>
         <p className={styles.addJobText}>Add a job</p>
       </div>
-      {show && <AddJobItem closeFold={() => {setShow(false)}} /> }
+      {show && <AddJobItem closeFold={() => setShow(!show)} /> }
     </div>
   )
 }
@@ -94,14 +94,16 @@ const AddJobItem = ({ closeFold }) => {
         </label>
       </div>
       <input 
+        required
         className={`${styles.input} ${styles.inputTitle}`}
-        placeholder="Job Title"
+        placeholder="Job Title (required)"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <input 
+        required
         className={`${styles.input} ${styles.inputCompany}`}
-        placeholder="Company"
+        placeholder="Company (required)"
         value={company}
         onChange={e => setCompany(e.target.value)}
       />
@@ -142,8 +144,9 @@ const AddJobItem = ({ closeFold }) => {
         onChange={e => setContact(e.target.value)}
       />
       <textarea 
+        required
         className={`${styles.input} ${styles.inputDescription}`}
-        placeholder="Description"
+        placeholder="Description (required)"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
@@ -177,7 +180,7 @@ const TagsInput: React.FC<{ tags: string[], handleTags: (arg: string[]) => void}
   return (
     <>
       <input
-        className={`${styles.input} ${styles.addTagInput}`}
+        className={styles.input}
         placeholder="tags"
         value={text}
         onChange={(e) => setText(e.target.value)}

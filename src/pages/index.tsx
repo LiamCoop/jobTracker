@@ -10,8 +10,6 @@ import { useUser } from '@auth0/nextjs-auth0';
 
 const Home: NextPage = () => {
 
-  // need to figure out another way to get user_id
-  // without hook, hook is async; takes too long
   const { user, isLoading } = useUser();
 
   return (
