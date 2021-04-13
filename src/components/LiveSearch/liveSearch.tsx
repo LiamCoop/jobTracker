@@ -14,9 +14,7 @@ interface User {
   sub?: string,
 }
 
-export const LiveSearch: React.FC<{ user: User }> = 
-({ user }) => {
-
+export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
   const { data: jobs, error } = useJobs(user.sub);
 
   const [show, setShow] = useState([])

@@ -31,10 +31,6 @@
   outline-width: 0;
 }
 
-.input:required {
-  color: red;
-}
-
 .input::-webkit-input-placeholder {
    text-align: center;
 }

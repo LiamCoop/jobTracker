@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { createJob } from '../../api';
-import { useUser } from '@auth0/nextjs-auth0';
 import styles from './AddJob.module.css';
 
-export const AddJobFold = () => {
+export const AddJobFold = ({ user }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -19,14 +18,13 @@ export const AddJobFold = () => {
         </div>
         <p className={styles.addJobText}>Add a job</p>
       </div>
-      {show && <AddJobItem closeFold={() => setShow(!show)} /> }
+      {show && <AddJobItem user={user} closeFold={() => setShow(!show)} /> }
     </div>
   )
 }
 
-const AddJobItem = ({ closeFold }) => {
-  const { user } = useUser();
-  const user_id = user ? user.sub : 'no user';
+const AddJobItem: React.FC<{ user, closeFold: () => void}> = ({ user, closeFold }) => {
+  const user_id = user ? user?.sub : 'default';
 
   const [title, setTitle] = useState('')
   const [company, setCompany] = useState('')
