@@ -6,6 +6,13 @@
   justify-content: center;
 }
 
+.noJob {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .searchGroup {
   display: flex;
   flex-direction: row;
@@ -32,7 +39,6 @@
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #333333;
-  /*background-color: #F2F2F8;*/
   background-color: #F4ECD6;
   opacity: 1;
 }

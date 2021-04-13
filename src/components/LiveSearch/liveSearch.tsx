@@ -21,17 +21,13 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
   const [text, setText] = useState('')
   const [tag, setTag] = useState(null);
 
-  const searchTag = (argtag: string) => {
-    setTag(tag !== argtag ? argtag : null)
-  }
+  const searchTag = (argtag: string) => setTag(tag !== argtag ? argtag : null)
 
   useEffect(() => {
     let tryshow = jobs ? jobs : [];
     if(tag) {
       tryshow = tryshow.filter((job: Job) => 
-        job.tags.filter((jtag: string) => 
-          jtag === tag
-        ).length !== 0
+        job.tags.filter((jtag: string) => jtag === tag).length !== 0
       )
     }
     if(text) {
@@ -48,7 +44,11 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
 
   return(
     <>
-      {jobs.length === 0 ? <div>Add a job!</div> :
+      {jobs.length === 0 ? (
+        <div className={styles.noJob}>
+          <p>Try adding a job!</p>
+        </div>
+      ) : (
         <div className={styles.liveSearchContainer}>
           <div className={styles.searchGroup}>
             {tag && <div className={styles.tagContainer}>
@@ -69,13 +69,12 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
                 </svg>
               </button>
             </div>
-            
           </div>
           <div className={styles.jobContainer}>
             {show.map((job) => <JobItem job={job} key={job.id} searchTag={searchTag} />)}
           </div>
         </div>
-      }
+      )}
     </>
   )
 }
