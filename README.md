@@ -4,6 +4,10 @@ This tool seeks to provide access to a central repository where users can store 
 Use tags and the search functionality to filter your job postings.
 Edit fields to update with contact information, or additional notes at a later time.
 
+file:///home/lco/Screenshot%20from%202021-04-12%2020-06-13.png![image](https://user-images.githubusercontent.com/22286436/114491861-3b922800-9bcc-11eb-88c0-98ffdce64cf8.png)
+
+file:///home/lco/Screenshot%20from%202021-04-12%2020-06-43.png![image](https://user-images.githubusercontent.com/22286436/114491877-4056dc00-9bcc-11eb-85e6-1990194be598.png)
+
 ## Tools Used
  - NextJS: https://nextjs.org/
  - TypeScript: https://github.com/microsoft/TypeScript
