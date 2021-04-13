@@ -1,0 +1,48 @@
+.editText {
+  white-space: pre-wrap;
+  margin: 5px;
+  color: #333333;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 15px;
+}
+
+.editDiv {
+  margin: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.editTextInput {
+  resize: vertical;
+  height: 100px;
+  width: 100%;
+  border: 2px solid #333333;
+  border-radius: 8px;
+  background-color: #F4ECD6;
+  margin: 5px;
+  height: 28px;
+  text-align: start;
+}
+
+.editInput {
+  border: 2px solid #333333;
+  border-radius: 8px;
+  background-color: #F4ECD6;
+  margin: 5px;
+  height: 28px;
+  text-align: start;
+}
+
+.editSave {
+  border: 2px solid #333333;
+  background-color: #F4ECD6;
+  border-radius: 10px;
+}
+.editSave:hover {
+  background-color: #C9C49C;
+}
+
