@@ -14,10 +14,10 @@ Edit fields to update with contact information, or additional notes at a later t
 
 # Features
 
+ - Interactive and responsive UI
  - Filter jobs using a live search.
  - Tags can also be used to filter jobs, they can be added on initial job creation, or added/removed later.
  - Editable fields, many fields can be updated after the initial job creation, or added if they were left off the initial job.
- - Responsive design optimized for use with mobile devices.
  - Persistent data storage in a PostgreSQL database when authenticated with Auth0.
  - RESTful API through NextJS.
 
