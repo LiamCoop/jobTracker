@@ -24,7 +24,7 @@ export const AddJobFold = ({ user }) => {
 }
 
 const AddJobItem: React.FC<{ user, closeFold: () => void}> = ({ user, closeFold }) => {
-  const user_id = user ? user?.sub : 'default';
+  const user_id = user ? user.sub : 'default';
 
   const [title, setTitle] = useState('')
   const [company, setCompany] = useState('')
