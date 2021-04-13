@@ -15,7 +15,7 @@ interface User {
 }
 
 export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
-  const { data: jobs, error } = useJobs(user.sub);
+  const { data: jobs, error } = useJobs(user?.sub);
 
   const [show, setShow] = useState([])
   const [text, setText] = useState('')
@@ -25,7 +25,7 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
     setTag(tag !== argtag ? argtag : null)
   }
 
-  const filter = () => {
+  useEffect(() => {
     let tryshow = jobs ? jobs : [];
     if(tag) {
       tryshow = tryshow.filter((job: Job) => 
@@ -41,10 +41,6 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
       )
     }
     setShow(tryshow)
-  }
-
-  useEffect(() => {
-    filter()
   }, [jobs, tag, text])
   
   if (error != null) return <div>Error loading jobs...</div>
@@ -52,7 +48,7 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
 
   return(
     <>
-      {jobs.length !== 0 ?
+      {jobs.length === 0 ? <div>Add a job!</div> :
         <div className={styles.liveSearchContainer}>
           <div className={styles.searchGroup}>
             {tag && <div className={styles.tagContainer}>
@@ -68,7 +64,7 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
                 onChange={e => setText(e.target.value)}
               />
               <button className={styles.searchButton}>
-                <svg className={styles.svg} height="24px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
+                <svg height="24px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                 </svg>
               </button>
@@ -78,7 +74,7 @@ export const LiveSearch: React.FC<{ user?: User }> = ({ user }) => {
           <div className={styles.jobContainer}>
             {show.map((job) => <JobItem job={job} key={job.id} searchTag={searchTag} />)}
           </div>
-        </div> : <div>Loading...</div> 
+        </div>
       }
     </>
   )
