@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Header.module.css';
 import { useUser } from '@auth0/nextjs-auth0';
 

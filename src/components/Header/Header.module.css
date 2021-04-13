@@ -16,9 +16,14 @@
   align-items: center;
 }
 
+
 .logDiv {
   border: 3px solid #333333;
   border-radius: 10px;
+}
+
+.logDiv:hover {
+  background-color: #C9C49C;
 }
 
 .login, 
