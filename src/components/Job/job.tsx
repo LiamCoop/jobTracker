@@ -87,6 +87,7 @@ export const JobItem: React.FC<{
           {!!job.description &&
             <>
               <h1 className={styles.header}>Job Description</h1>
+              <div className={styles.marginWrap}>
               <Editable 
                 textArea 
                 item={job.description} 
@@ -94,30 +95,35 @@ export const JobItem: React.FC<{
                   updateJob({ ...job, description: arg })
                 }} 
               />
+              </div>
             </>}
           {!!job.notes &&
             <>
               <h1 className={styles.header}>Notes</h1>
+              <div className={styles.marginWrap}>
               <Editable 
                 item={job.notes} 
                 update={(arg: string) => {
                   updateJob({ ...job, notes: arg }) 
                 }} 
               />
+              </div>
             </>}
           {!!job.contact &&
             <>
               <h1 className={styles.header}>Contact</h1>
+              <div className={styles.marginWrap}>
               <Editable 
                 item={job.contact} 
                 update={(arg: string) => {
                   updateJob({ ...job, contact: arg })
                 }} 
               />
+              </div>
             </>}
           {(!job.datePosted || !job.dateClosed || !job.description || 
             !job.location || !job.notes || !job.contact || !job.link) 
-            && <AddMissing job={job} />}
+              && <div className={styles.marginWrap}><AddMissing job={job} /></div>}
         </div>
       }
     </div>
