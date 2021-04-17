@@ -10,24 +10,9 @@ export const Header = () => {
 
   return (
     <div className={styles.headerContainer}>
-      <div className={styles.linkContainer}>
-        {user ? (
-          <a href="/api/auth/logout">
-            <div className={styles.logDiv}>
-              <p className={styles.login}>Logout</p>
-            </div>
-          </a>
-        ) : (
-          <a href="/api/auth/login">
-            <div className={styles.logDiv}>
-              <p className={styles.logout}>Login</p>
-            </div>
-          </a>
-        )}
-      </div>
-      <div className={styles.userContainer}>
-        {user ? (
-          <>
+      {user ? (
+        <>
+          <div className={styles.userContainer}>
             <img 
               className={styles.userAvatar} 
               src={user?.picture} 
@@ -35,9 +20,20 @@ export const Header = () => {
             />
             <p className={styles.userName}>{user?.name}</p>
             <p className={styles.userEmail}>{user?.email}</p>
-          </>
-        ) : null}
-      </div>
+          </div>
+          <a className={styles.link} href="/api/auth/logout">
+            <div className={styles.logDiv}>
+              <p className={styles.login}>Logout</p>
+            </div>
+          </a>
+        </>
+      ) : (
+        <a className={styles.link} href="/api/auth/login">
+          <div className={styles.logDiv}>
+            <p className={styles.logout}>Login</p>
+          </div>
+        </a>
+      )}
     </div>
   )
 }
