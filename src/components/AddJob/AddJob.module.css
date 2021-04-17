@@ -21,7 +21,6 @@
 
 .addJob {
   width: 60%;
-  row-gap: 8px;
   display: flex;
   flex-direction: column;
 }
@@ -127,7 +126,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 10px;
-  gap: 2px;
 }
 
 .tag {
