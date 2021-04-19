@@ -35,17 +35,39 @@
   text-align: start;
 }
 
-.editSave {
+.circle {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  background-color: #ebe9e2;
   border: 2px solid #333333;
-  background-color: #F4ECD6;
-  border-radius: 10px;
+  border-radius: 50%;
+  margin: 2px;
 }
 
-.editSave:hover {
+.circle:hover {
+  background-color: #C9C49C;
+}
+
+.svg {
+  cursor: pointer;
+  border: 2px solid #333333;
+  border-radius: 8px;
+  margin: 0 2px;
+}
+.svg:hover {
   background-color: #C9C49C;
 }
 
 .removeText {
   color: red;
+  cursor: pointer;
+  justify-self: flex-start;
+  align-self: center;
   font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
