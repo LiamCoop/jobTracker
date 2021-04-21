@@ -27,7 +27,7 @@ Edit fields to update with contact information, or additional notes at a later t
  - Tags can also be used to filter jobs, they can be added on initial job creation, or added/removed later.
  - Editable fields, many fields can be updated after the initial job creation, or added if they were left off the initial job.
  - Persistent data storage in a PostgreSQL database when authenticated with Auth0.
- - RESTful API through NextJS.
+ - RESTful API built with NextJS dynamic API routes.
 
 # Jobs
 
