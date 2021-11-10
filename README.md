@@ -1,4 +1,3 @@
-Currently live! Check it out: https://jobTracker-development.up.railway.app/
 
 Sign up to start managing your job postings.
 
